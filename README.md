@@ -8,12 +8,14 @@ Pour plus d'informations, visitez les pages :
 - [Fork Mowgli](https://github.com/cedbossneo/Mowgli)
 - [Mowgli Docker](https://github.com/CedBossNeo/mowgli-docker)
 
-## Prérequis
+## Prérequis (et matériels que j'ai utilisés)
 
-- Raspberry Pi avec Pi OS installé ( cela suppose que vous avez déja créer votre sd ou ssd (pour le pi 4) et qu'il démarre sans problème sur le pi
-- Accès Internet
-- Putty ou similaire (moi j'ai utilisé solarputty
+- Raspberry Pi avec Pi OS installé ( cela suppose que vous avez déja créer votre sd ou ssd (pour le pi 4) et qu'il démarre sans problème sur le pi)
+- Carte GPS/Rtk [F9P](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers) avec son [cable d'antenne](https://fr.aliexpress.com/item/1005004690761874.html?spm=a2g0o.order_list.order_list_main.23.27185e5bO83Ive&gatewayAdapt=glo2fra) et son antenne [Bt560](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) mais ayant eu des difficulté de réception de mon coté j'ai utilisé la Bt603 qui est plus puissante mais plus chère.
+- 
+- Putty ou similaire (moi j'ai utilisé [solarputty](https://www.solarwinds.com/free-tools/solar-putty))
 - Connaissances de base en ligne de commande ( pas obligatoire car je détails tout ici )
+- Accès Internet (la configuration) 
 
 ## Étape 1 : Mise à jour de Pi OS
 
