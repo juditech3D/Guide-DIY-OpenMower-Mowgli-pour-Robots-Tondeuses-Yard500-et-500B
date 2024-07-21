@@ -1,174 +1,273 @@
-# just-the-docs-template
 
-This is a *bare-minimum* template to create a [Jekyll] site that:
+# Guide OpenMower Mowgli DIY Robot Tondeuse Yard 500 et 500B
 
-- uses the [Just the Docs] theme;
-- can be built and published on [GitHub Pages];
-- can be built and previewed locally, and published on other platforms.
+Bienvenue dans ce guide complet pour configurer et déployer votre robot tondeuse OpenMower Mowgli Yard 500 et 500B en français, basé sur mon expérience de la construction du robot Yardforce 500B.
 
-More specifically, the created site:
+Pour plus d'informations, visitez les pages :  
+- [Page d'accueil d'OpenMower](https://github.com/CedBossNeo/openmower)
+- [Fork Mowgli](https://github.com/cedbossneo/Mowgli)
+- [Mowgli Docker](https://github.com/CedBossNeo/mowgli-docker)
 
-- uses a gem-based approach, i.e. uses a `Gemfile` and loads the `just-the-docs` gem;
-- uses the [GitHub Pages / Actions workflow] to build and publish the site on GitHub Pages.
+## Prérequis
 
-To get started with creating a site, simply:
+- Raspberry Pi avec Pi OS installé ( cela suppose que vous avez déja créer votre sd ou ssd (pour le pi 4) et qu'il démarre sans problème sur le pi
+- Accès Internet
+- Putty ou similaire (moi j'ai utilisé solarputty
+- Connaissances de base en ligne de commande ( pas obligatoire car je détails tout ici )
 
-1. click "[use this template]" to create a GitHub repository
-2. go to Settings > Pages > Build and deployment > Source, and select GitHub Actions
+## Étape 1 : Mise à jour de Pi OS
 
-If you want to maintain your docs in the `docs` directory of an existing project repo, see [Hosting your docs from an existing project repo](#hosting-your-docs-from-an-existing-project-repo).
+Avant de commencer, assurez-vous que votre système est à jour.
 
-After completing the creation of your new site on GitHub, update it as needed:
+```sh
+sudo apt update && sudo apt upgrade -y
+```
 
-## Replace the content of the template pages
+## Étape 2 : Installation de Docker
 
-Update the following files to your own content:
+Installez Docker en exécutant la commande suivante :
 
-- `index.md` (your new home page)
-- `README.md` (information for those who access your site repo on GitHub)
+```sh
+curl -fsSL https://get.docker.com | sh
+```
 
-## Changing the version of the theme and/or Jekyll
+## Étape 3 : Installation de Docker Compose
 
-Simply edit the relevant line(s) in the `Gemfile`.
+Installez Docker Compose avec la commande suivante :
 
-## Adding a plugin
+```sh
+sudo apt install docker-compose -y
+```
 
-The Just the Docs theme automatically includes the [`jekyll-seo-tag`] plugin.
+## Étape 4 : Configuration de udev
 
-To add an extra plugin, you need to add it in the `Gemfile` *and* in `_config.yml`. For example, to add [`jekyll-default-layout`]:
+1. Créez et éditez le fichier de règles udev :
 
-- Add the following to your site's `Gemfile`:
+```sh
+sudo nano /etc/udev/rules.d/50-mowgli.rules
+```
 
-  ```ruby
-  gem "jekyll-default-layout"
-  ```
+2. Ajoutez les règles suivantes :
 
-- And add the following to your site's `_config.yml`:
+```sh
+SUBSYSTEM=="tty" ATTRS{product}=="Mowgli", SYMLINK+="mowgli"
+# simpleRTK USB
+SUBSYSTEM=="tty" ATTRS{idVendor}=="1546" ATTRS{idProduct}=="01a9", SYMLINK+="gps"
+# ESP USB CDC - RTK1010Board
+SUBSYSTEM=="tty" ATTRS{idVendor}=="303a" ATTRS{idProduct}=="4001", SYMLINK+="gps"
+```
 
-  ```yaml
-  plugins:
-    - jekyll-default-layout
-  ```
+3. Rechargez les règles udev :
 
-Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+```sh
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
 
-## Publishing your site on GitHub Pages
+## Étape 5 : Clonage du dépôt
 
-1.  If your created site is `YOUR-USERNAME/YOUR-SITE-NAME`, update `_config.yml` to:
+Clonez le dépôt GitHub avec la commande suivante :
 
-    ```yaml
-    title: YOUR TITLE
-    description: YOUR DESCRIPTION
-    theme: just-the-docs
+```sh
+git clone https://github.com/cedbossneo/mowgli-docker
+cd mowgli-docker
+```
 
-    url: https://YOUR-USERNAME.github.io/YOUR-SITE-NAME
+## Étape 6 : Configuration de l'environnement
 
-    aux_links: # remove if you don't want this link to appear on your pages
-      Template Repository: https://github.com/YOUR-USERNAME/YOUR-SITE-NAME
-    ```
+1. Créez et éditez le fichier `.env` :
 
-2.  Push your updated `_config.yml` to your site on GitHub.
+```sh
+nano .env
+```
 
-3.  In your newly created repo on GitHub:
-    - go to the `Settings` tab -> `Pages` -> `Build and deployment`, then select `Source`: `GitHub Actions`.
-    - if there were any failed Actions, go to the `Actions` tab and click on `Re-run jobs`.
+2. Remplacez les valeurs `ROS_IP` et `MOWER_IP` par l'adresses IP de votre raspberry :
 
-## Building and previewing your site locally
+```sh
+# ROS_IP est l'IP de la machine exécutant le conteneur Docker
+# MOWER_IP est l'IP de la tondeuse
+# Lorsque vous n'êtes pas en mode ser2net, les deux IPs doivent être les mêmes
+ROS_IP=192.168.1.34
+MOWER_IP=192.168.1.34
+IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
+```
 
-Assuming [Jekyll] and [Bundler] are installed on your computer:
+## Étape 7 : Mise à jour de docker-compose.yaml
 
-1.  Change your working directory to the root directory of your site.
+Ouvrez le fichier `docker-compose.yaml` :
 
-2.  Run `bundle install`.
+```sh
+nano docker-compose.yaml
+```
 
-3.  Run `bundle exec jekyll serve` to build your site and preview it at `localhost:4000`.
+Remplacez le contenu par le suivant :
 
-    The built site is stored in the directory `_site`.
+```yaml
+version: '3'
 
-## Publishing your built site on a different platform
+services:
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_CLEANUP: 'true'
+      WATCHTOWER_POLL_INTERVAL: 14400
+      WATCHTOWER_DEBUG: 'false'
+      WATCHTOWER_LABEL_ENABLE: 'true'
+  gui:
+    container_name: openmower-gui
+    labels:
+      "com.centurylinklabs.watchtower.enable": true
+      project: openmower
+      app: gui
+    image: ghcr.io/cedbossneo/openmower-gui:master
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    environment:
+      ROS_IP: ${ROS_IP}
+      ROS_MASTER_URI: http://${ROS_IP}:11311
+      MOWER_CONFIG_FILE: /config/mower_config.sh
+      DOCKER_HOST: unix:///var/run/docker.sock
+      DB_PATH: /db
+    depends_on:
+      - roscore
+    volumes:
+      - /dev:/dev
+      - ./config/db:/db
+      - ./config/om:/config
+      - /var/run/docker.sock:/var/run/docker.sock
+  web:
+    container_name: mowgli-web
+    labels:
+      project: openmower
+      app: web
+    image: nginx
+    ports:
+      - 4005:80
+    volumes:
+      - ./web:/usr/share/nginx/html:ro
+    restart: unless-stopped
 
-Just upload all the files in the directory `_site`.
+  mosquitto:
+    container_name: mowgli-mqtt
+    labels:
+      project: openmower
+      app: mqtt
+    hostname: mosquitto
+    image: eclipse-mosquitto:latest
+    ports:
+      - 1883:1883
+      - 9001:9001
+    volumes:
+      - ./config/mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+    restart: unless-stopped
 
-## Customization
+  roscore:
+    container_name: mowgli-roscore
+    labels:
+      project: openmower
+      app: roscore
+    image: ${IMAGE}
+    network_mode: host
+    tty: true
+    privileged: true
+    command:
+      - /opt/ros/noetic/bin/roscore
+    environment:
+      ROS_IP: ${ROS_IP}
+      ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
+      ROSOUT_DISABLE_FILE_LOGGING: "true"
+    tmpfs: /root/.ros/log/
+    volumes:
+      - ./config/om:/config
+      - ./ros:/root/.ros/
+      - /etc/timezone:/etc/timezone:ro
+    restart: unless-stopped
 
-You're free to customize sites that you create with this template, however you like!
+  rosserial:
+    container_name: mowgli-rosserial
+    labels:
+      project: openmower
+      app: rosserial
+    image: ${IMAGE}
+    network_mode: host
+    tty: true
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
+    environment:
+      ROS_MASTER_URI: http://${ROS_IP}:11311
+      ROS_IP: ${ROS_IP}
+      ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
+      ROSOUT_DISABLE_FILE_LOGGING: "true"
+    command:
+      - /opt/ros/noetic/bin/rosrun
+      - rosserial_server
+      - serial_node
+      - _port:=/dev/mowgli
+      - _baud:=115200
+    tmpfs: /root/.ros/log/
+    volumes:
+      - ./ros:/root/.ros/
+      - ./config/om:/config
+      - /etc/timezone:/etc/timezone:ro
+      - /dev:/dev
+    depends_on:
+      - roscore
+    restart: unless-stopped
 
-[Browse our documentation][Just the Docs] to learn more about how to use this theme.
+  openmower:
+    container_name: mowgli-openmower
+    labels:
+      project: openmower
+      app: openmower
+    image: ${IMAGE}
+    network_mode: host
+    tty: true
+    privileged: true
+    logging:
+      driver: "json-file"
+      options:
+        max-file: "5"
+        max-size: 10m
+    environment:
+      ROS_MASTER_URI: http://${ROS_IP}:11311
+      ROS_IP: ${ROS_IP}
+      ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
+      ROSOUT_DISABLE_FILE_LOGGING: "true"
+    tmpfs: /root/.ros/log/
+    volumes:
+      - ./config/om:/config
+      - ./mower_params:/root/mower_params:ro
+      - ./params:/opt/open_mower_ros/src/open_mower/params:ro
+      - ./ros:/root/.ros/
+      - /etc/timezone:/etc/timezone:ro
+      - /dev:/dev
+    depends_on:
+      - rosserial
+    restart: unless-stopped
+```
 
-## Hosting your docs from an existing project repo
+## Étape 8 : Démarrage des Conteneurs
 
-You might want to maintain your docs in an existing project repo. Instead of creating a new repo using the [just-the-docs template](https://github.com/just-the-docs/just-the-docs-template), you can copy the template files into your existing repo and configure the template's Github Actions workflow to build from a `docs` directory. You can clone the template to your local machine or download the `.zip` file to access the files.
+Démarrez les conteneurs Docker :
 
-### Copy the template files
+```sh
+sudo docker-compose up -d
+```
 
-1.  Create a `.github/workflows` directory at your project root if your repo doesn't already have one. Copy the `pages.yml` file into this directory. GitHub Actions searches this directory for workflow files.
+## Étape 9 : Surveillance des Logs
 
-2.  Create a `docs` directory at your project root and copy all remaining template files into this directory.
+Surveillez les logs pour vérifier que tout fonctionne correctement :
 
-### Modify the GitHub Actions workflow
+```sh
+sudo docker-compose logs -f
+```
 
-The GitHub Actions workflow that builds and deploys your site to Github Pages is defined by the `pages.yml` file. You'll need to edit this file to that so that your build and deploy steps look to your `docs` directory, rather than the project root.
-
-1.  Set the default `working-directory` param for the build job.
-
-    ```yaml
-    build:
-      runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: docs
-    ```
-
-2.  Set the `working-directory` param for the Setup Ruby step.
-
-    ```yaml
-    - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
-          cache-version: 0
-          working-directory: '${{ github.workspace }}/docs'
-    ```
-
-3.  Set the path param for the Upload artifact step:
-
-    ```yaml
-    - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: "docs/_site/"
-    ```
-
-4.  Modify the trigger so that only changes within the `docs` directory start the workflow. Otherwise, every change to your project (even those that don't affect the docs) would trigger a new site build and deploy.
-
-    ```yaml
-    on:
-      push:
-        branches:
-          - "main"
-        paths:
-          - "docs/**"
-    ```
-
-## Licensing and Attribution
-
-This repository is licensed under the [MIT License]. You are generally free to reuse or extend upon this code as you see fit; just include the original copy of the license (which is preserved when you "make a template"). While it's not necessary, we'd love to hear from you if you do use this template, and how we can improve it for future use!
-
-The deployment GitHub Actions workflow is heavily based on GitHub's mixed-party [starter workflows]. A copy of their MIT License is available in [actions/starter-workflows].
-
-----
-
-[^1]: [It can take up to 10 minutes for changes to your site to publish after you push the changes to GitHub](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
-
-[Jekyll]: https://jekyllrb.com
-[Just the Docs]: https://just-the-docs.github.io/just-the-docs/
-[GitHub Pages]: https://docs.github.com/en/pages
-[GitHub Pages / Actions workflow]: https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/
-[Bundler]: https://bundler.io
-[use this template]: https://github.com/just-the-docs/just-the-docs-template/generate
-[`jekyll-default-layout`]: https://github.com/benbalter/jekyll-default-layout
-[`jekyll-seo-tag`]: https://jekyll.github.io/jekyll-seo-tag
-[MIT License]: https://en.wikipedia.org/wiki/MIT_License
-[starter workflows]: https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml
-[actions/starter-workflows]: https://github.com/actions/starter-workflows/blob/main/LICENSE
+Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé !
