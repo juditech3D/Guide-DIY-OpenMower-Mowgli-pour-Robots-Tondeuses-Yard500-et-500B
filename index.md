@@ -36,11 +36,28 @@ Pour plus d'informations, visitez les pages :
 - Carte GPS/RTK F9P avec son câble d'antenne et son antenne Bt560 (mais ayant eu des difficultés de réception de mon côté, j'ai utilisé la Bt603 qui est plus puissante mais plus chère)
 - Putty ou similaire (moi j'ai utilisé Solarputty)
 - Connaissances de base en ligne de commande (pas obligatoire car je détaille tout ici)
-- Accès Internet (la configuration)
+- Accès Internet (configuration wifi du pi obligatoire pour que cela fonctionne)
 
 ## Mise à jour de Pi OS
+Une fois connecter en ssh cela devrait ressembler a ça : 
+
+```bash
+Linux yardforce** 6.6.31+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.6.31-1+rpt1 (2024-05-29) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Sat Jul 20 20:07:53 2024
+juditech3d@yardforce**:~ $
+```
 
 Avant de commencer, assurez-vous que votre système est à jour.
 
+Faites une mise a jour du pi
+
 ```bash
 sudo apt update && sudo apt upgrade -y
+```
