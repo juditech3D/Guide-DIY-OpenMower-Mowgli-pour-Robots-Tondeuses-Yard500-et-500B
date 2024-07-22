@@ -264,12 +264,35 @@ Démarrez les conteneurs Docker :
 sudo docker-compose up -d
 ```
 
-## Étape 9 : Surveillance des Logs
+## Étape 9 : Comment arrêtez et mettre a jour les Conteneurs si besoin
+
+Arrêter les conteneurs Docker :
+
+```sh
+sudo docker-compose down
+```
+
+Mettre à jour les conteneurs Docker :
+
+Faites un pull (pas besoin d'arreter les conteneurs)
+```sh
+sudo docker-compose pull
+```
+Puis ensuite relancer les conteneurs
+```sh
+sudo docker-compose up -d
+```
+
+## Étape 10 : Surveillance des Logs
 
 Surveillez les logs pour vérifier que tout fonctionne correctement :
 
 ```sh
 sudo docker-compose logs -f
 ```
+## Bonus : Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil de les imprimer en PETG ou ABS)
+
+- Support Raspberry [Pi4]([[https://makerworld.com/en/@juditech3d])
+- Support [F9P]([[https://makerworld.com/en/@juditech3d])
 
 Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé !
