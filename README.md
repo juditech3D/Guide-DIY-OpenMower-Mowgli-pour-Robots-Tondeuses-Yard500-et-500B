@@ -292,7 +292,7 @@ sudo docker-compose logs -f
 ```
 ## Bonus : Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil de les imprimer en PETG ou ABS)
 
-- Support Raspberry [Pi4]([[https://makerworld.com/en/@juditech3d])
-- Support [F9P]([[https://makerworld.com/en/@juditech3d])
+- Support Raspberry [Pi4](https://makerworld.com/en/@juditech3d)
+- Support [F9P](https://makerworld.com/en/@juditech3d)
 
 Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé !
