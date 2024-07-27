@@ -261,7 +261,7 @@ services:
 
 ## Étape 8 : Démarrage des Conteneurs
 
-Démarrez les conteneurs Docker :
+Démarrez les conteneurs Docker (il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker") :
 
 ```sh
 sudo docker-compose up -d
