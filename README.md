@@ -7,7 +7,7 @@ Bienvenue dans ce guide complet pour configurer et déployer votre robot tondeus
 **Avant de commencer, assurez-vous de bien comprendre les avertissements et les prérequis.**
 
 Pour plus d'informations, visitez les pages :  
-- [Page d'accueil d'OpenMower](https://github.com/CedBossNeo/openmower)
+- [Page d'accueil d'OpenMower](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-robot/photo-guide/)
 - [Fork Mowgli](https://github.com/cedbossneo/Mowgli)
 - [Mowgli Docker](https://github.com/CedBossNeo/mowgli-docker)
 - [Groupe d'entraide telegram français du fork Mowgli](https://t.me/+x6U3UwU5lB4yOWNk)
