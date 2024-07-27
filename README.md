@@ -71,6 +71,7 @@ sudo udevadm trigger
 
 ## Étape 5 : Clonage du dépôt
 
+On récupère le code pour la génération des containers dans docker
 Clonez le dépôt GitHub avec la commande suivante :
 
 ```sh
@@ -80,7 +81,7 @@ cd mowgli-docker
 
 ## Étape 6 : Configuration de l'environnement
 
-1. Créez et éditez le fichier `.env` :
+1. Créez et éditez le fichier `.env` (il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker") :
 
 ```sh
 nano .env
