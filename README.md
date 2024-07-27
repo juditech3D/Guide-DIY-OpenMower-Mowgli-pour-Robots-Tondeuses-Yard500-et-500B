@@ -295,11 +295,27 @@ Surveillez les logs pour vérifier que tout fonctionne correctement :
 ```sh
 sudo docker-compose logs -f
 ```
-## Bonus : Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil de les imprimer en PETG ou ABS)
+
+Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé !
+
+## Bonus : 
+
+## Pièces 3D
+Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil de les imprimer en PETG ou ABS)
 
 - Support Raspberry [Pi4](https://makerworld.com/en/@juditech3d)
 - Support [F9P](https://makerworld.com/en/@juditech3d)
 
 Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Rendez-vous [ICI](#)
 
-Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé !
+
+## Firmware personnalisés Mowgli compilé par mes propre soins.
+
+Les firmware disponible ici sont a utilisés a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
+
+- Firmware d'origine Yardforce 500 [Firmware Y500-Origine](#)
+- Firmware d'origine Yardforce 500B [Firmware Y500B-Origine](#)
+- Firmware personnalisé Yardforce 500 [Firmware Y500-Mowgli](#)
+- Firmware personnalisé Yardforce 500B [Firmware Y500-Mowgli](#)
+
+  
