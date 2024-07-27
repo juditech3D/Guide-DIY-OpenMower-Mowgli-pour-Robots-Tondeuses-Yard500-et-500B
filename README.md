@@ -97,7 +97,7 @@ MOWER_IP=192.168.1.34
 IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
 ```
 
-## Étape 7 : Mise à jour de docker-compose.yaml
+## Étape 7 : Mise à jour de docker-compose.yaml( optionelle et pas obligatoire sauter a l'étape 8 )
 
 Ouvrez le fichier `docker-compose.yaml` :
 
