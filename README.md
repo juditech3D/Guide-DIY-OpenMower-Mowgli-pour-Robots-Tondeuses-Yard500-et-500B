@@ -10,6 +10,7 @@ Pour plus d'informations, visitez les pages :
 - [Page d'accueil d'OpenMower](https://github.com/CedBossNeo/openmower)
 - [Fork Mowgli](https://github.com/cedbossneo/Mowgli)
 - [Mowgli Docker](https://github.com/CedBossNeo/mowgli-docker)
+- [Groupe d'entraide telegram français du fork Mowgli](https://t.me/+x6U3UwU5lB4yOWNk)
 
 ## Prérequis (et matériels que j'ai utilisés)
 
