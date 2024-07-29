@@ -99,7 +99,7 @@ MOWER_IP=192.168.1.34
 IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
 ```
 
-## Étape 7 : Mise à jour de docker-compose.yaml( optionelle et pas obligatoire sauter a l'étape 8 )
+## Étape 7 : Mise à jour de docker-compose.yaml ( optionelle car je l'ai mis a jour suite a une erreur comme quoi le fichier était obsolète mais après plusieurs tests cela n'a aucun impact sur le fonctionnement et donc pas obligatoire sauter a l'étape 8 )
 
 Ouvrez le fichier `docker-compose.yaml` :
 
@@ -312,6 +312,8 @@ Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Rendez-vous [ICI
 ## Firmware personnalisés Mowgli compilé par mes propre soins.
 
 Les firmware disponible ici sont a utilisés a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
+
+Attention : veuillez prendre soin de choisir le firmware qui correspond au modèle de votre carte mère, choisir le modèle 500 ou 500B ne suffit pas.
 
 - Firmware d'origine Yardforce 500 [Firmware Y500-Origine](#)
 - Firmware d'origine Yardforce 500B [Firmware Y500B-Origine](#)
