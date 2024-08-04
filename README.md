@@ -19,7 +19,7 @@ Pour plus d'informations, visitez les pages :
 - 
 - Putty ou similaire (moi j'ai utilisé [solarputty](https://www.solarwinds.com/free-tools/solar-putty))
 - Connaissances de base en ligne de commande ( pas obligatoire car je détails tout ici )
-- Accès Internet (la configuration) 
+- Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début) 
 
 ## Étape 1 : Mise à jour de Pi OS
 
