@@ -19,7 +19,7 @@ Pour plus d'informations, visitez les pages :
 - 
 - Putty ou similaire (moi j'ai utilisé [solarputty](https://www.solarwinds.com/free-tools/solar-putty))
 - Connaissances de base en ligne de commande ( pas obligatoire car je détails tout ici )
-- Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début) 
+- Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début, mais attention l'IP qu'il faudra utiliser dans la suite du tuto est bien celle du wifi qui elle, est différente) 
 
 ## Étape 1 : Mise à jour de Pi OS
 
@@ -63,6 +63,8 @@ SUBSYSTEM=="tty" ATTRS{idVendor}=="1546" ATTRS{idProduct}=="01a9", SYMLINK+="gps
 SUBSYSTEM=="tty" ATTRS{idVendor}=="303a" ATTRS{idProduct}=="4001", SYMLINK+="gps"
 ```
 
+Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
+
 3. Rechargez les règles udev :
 
 ```sh
@@ -99,12 +101,17 @@ MOWER_IP=192.168.1.34
 IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
 ```
 
-## Étape 7 : Mise à jour de docker-compose.yaml ( optionelle car je l'ai mis a jour suite a une erreur comme quoi le fichier était obsolète mais après plusieurs tests cela n'a aucun impact sur le fonctionnement et donc pas obligatoire sauter a l'étape 8 )
+Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
+
+## Étape 7 : Mise à jour de docker-compose.yaml ( mettre à jour suite a une erreur comme quoi le fichier était obsolète donc obligatoire sinon vous aurez une erreur et vous ne pourrez pas démarrer les dockers)
+
+![Erreur docker-compose.yaml](https://t.me/+x6U3UwU5lB4yOWNk)
+
 
 Ouvrez le fichier `docker-compose.yaml` :
 
 ```sh
-nano docker-compose.yaml
+sudo nano docker-compose.yaml
 ```
 
 Remplacez le contenu par le suivant :
@@ -260,6 +267,8 @@ services:
       - rosserial
     restart: unless-stopped
 ```
+
+Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
 
 ## Étape 8 : Démarrage des Conteneurs
 
