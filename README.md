@@ -114,7 +114,7 @@ Ouvrez le fichier `docker-compose.yaml` :
 sudo nano docker-compose.yaml
 ```
 
-Remplacez le contenu par le suivant :
+Remplacez le contenu par le suivant ou modifier simplement les lignes indiquer ci-dessous :
 
 ```yaml
 version: '3'
@@ -193,7 +193,7 @@ services:
     environment:
       ROS_IP: ${ROS_IP}
       ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
-      ROSOUT_DISABLE_FILE_LOGGING: "true"
+      ROSOUT_DISABLE_FILE_LOGGING: "true" # ou modifier cette ligne : true en "true"
     tmpfs: /root/.ros/log/
     volumes:
       - ./config/om:/config
@@ -219,7 +219,7 @@ services:
       ROS_MASTER_URI: http://${ROS_IP}:11311
       ROS_IP: ${ROS_IP}
       ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
-      ROSOUT_DISABLE_FILE_LOGGING: "true"
+      ROSOUT_DISABLE_FILE_LOGGING: "true" # ou modifier cette ligne : true en "true"
     command:
       - /opt/ros/noetic/bin/rosrun
       - rosserial_server
@@ -254,7 +254,7 @@ services:
       ROS_MASTER_URI: http://${ROS_IP}:11311
       ROS_IP: ${ROS_IP}
       ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
-      ROSOUT_DISABLE_FILE_LOGGING: "true"
+      ROSOUT_DISABLE_FILE_LOGGING: "true" # ou modifier cette ligne : true en "true"
     tmpfs: /root/.ros/log/
     volumes:
       - ./config/om:/config
