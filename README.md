@@ -105,7 +105,7 @@ Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl 
 
 ## Étape 7 : Mise à jour de docker-compose.yaml ( mettre à jour suite a une erreur comme quoi le fichier était obsolète donc obligatoire sinon vous aurez une erreur et vous ne pourrez pas démarrer les dockers)
 
-![Erreur docker-compose.yaml](https://t.me/+x6U3UwU5lB4yOWNk)
+![Erreur docker-compose.yaml](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Solarputty/Erreur%20docker-compose.yaml.png)
 
 
 Ouvrez le fichier `docker-compose.yaml` :
