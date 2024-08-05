@@ -23,7 +23,7 @@ Pour plus d'informations, visitez les pages :
 
 # Préparation de la carte sd/SSD du raspberry pi
 
-![Tuto raspberry pi imager](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/Média/Tuto%20raspberry%20pi%20imager%20‐%20Réalisée%20avec%20Clipchamp.mp4)
+![Tuto raspberry pi imager](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/M%C3%A9dia/Tuto%20raspberry%20pi%20imager%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif)
 
 
 
