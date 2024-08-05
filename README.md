@@ -21,6 +21,15 @@ Pour plus d'informations, visitez les pages :
 - Connaissances de base en ligne de commande ( pas obligatoire car je détails tout ici )
 - Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début, mais attention l'IP qu'il faudra utiliser dans la suite du tuto est bien celle du wifi qui elle, est différente) 
 
+# Préparation de la carte sd/SSD du raspberry pi
+
+
+
+
+
+
+# Préparation du raspberry pi et configuration
+
 ## Étape 1 : Mise à jour de Pi OS
 
 Avant de commencer, assurez-vous que votre système est à jour.
