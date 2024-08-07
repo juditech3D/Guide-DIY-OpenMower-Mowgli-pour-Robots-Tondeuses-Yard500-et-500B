@@ -123,7 +123,7 @@ Ouvrez le fichier `docker-compose.yaml` :
 sudo nano docker-compose.yaml
 ```
 
-Remplacez le contenu par le suivant ou modifier simplement les lignes indiquer ci-dessous par cette fleche <================== :
+Remplacez le contenu par le suivant ou modifier simplement les lignes indiquer ci-dessous par cette fleche <============= :
 
 ```yaml
 version: '3'
@@ -313,8 +313,10 @@ Surveillez les logs pour vérifier que tout fonctionne correctement :
 ```sh
 sudo docker-compose logs -f
 ```
+Pour sortir des logs, faites Ctrl "c"
 
-Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé !
+
+Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé, enfin presque car il reste la configuration de l'application et la créations des cartes de tontes !
 
 ## Bonus : 
 
