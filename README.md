@@ -96,7 +96,7 @@ cd mowgli-docker
 1. Créez et éditez le fichier `.env` (il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker") :
 
 ```sh
-nano .env
+sudo nano .env
 ```
 
 2. Remplacez les valeurs `ROS_IP` et `MOWER_IP` par l'adresses IP de votre raspberry :
