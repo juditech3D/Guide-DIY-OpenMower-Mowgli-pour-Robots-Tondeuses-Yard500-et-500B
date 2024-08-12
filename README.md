@@ -43,7 +43,7 @@ sudo apt update && sudo apt upgrade -y
 Installez Docker en exécutant la commande suivante :
 
 ```sh
-curl -fsSL https://get.docker.com | sh
+curl https://get.docker.com | sh
 ```
 
 ## Étape 3 : Installation de Docker Compose
