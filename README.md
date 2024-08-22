@@ -25,7 +25,100 @@ Pour plus d'informations, visitez les pages :
 
 ![Tuto raspberry pi imager](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/M%C3%A9dia/Tuto%20raspberry%20pi%20imager%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif)
 
+### Étapes pour configurer un ou plusieurs réseaux Wi-Fi sur un Raspberry Pi 4
 
+#### 1. Préparation de la carte SD
+
+1. **Gravez l'image de Raspberry Pi OS** sur la carte SD en utilisant un outil comme Raspberry Pi Imager ou Balena Etcher.
+2. **Insérez la carte SD** dans votre ordinateur après avoir gravé l'image.
+
+#### 2. Accédez à la partition `boot`
+
+1. **Accédez à la partition `boot`** de la carte SD (cette partition est visible sous Windows, macOS et Linux).
+2. **Ouvrez un éditeur de texte** comme Notepad++ (Windows), TextEdit (macOS), ou Nano (Linux).
+
+#### 3. Créez le fichier `wpa_supplicant.conf`
+
+1. **Dans la partition `boot`, créez un nouveau fichier texte** nommé `wpa_supplicant.conf`
+
+2. **Ajoutez la configuration Wi-Fi** :
+
+   - **Pour un seul réseau** :
+     ```sh
+     country=FR
+     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+     update_config=1
+
+     network={
+         ssid="Votre_SSID"
+         psk="Votre_Mot_de_passe"
+         key_mgmt=WPA-PSK
+     }
+     ```
+
+   - **Pour plusieurs réseaux** :
+     ```sh
+     country=FR
+     ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+     update_config=1
+
+     network={
+         ssid="Premier_SSID"
+         psk="Premier_Mot_de_passe"
+         key_mgmt=WPA-PSK
+     }
+
+     network={
+         ssid="Deuxieme_SSID"
+         psk="Deuxieme_Mot_de_passe"
+         key_mgmt=WPA-PSK
+     }
+     ```
+
+   - **Explication des paramètres** :
+     - **`country=FR`** : Remplacez `FR` par le code de votre pays si nécessaire (par exemple, `US` pour les États-Unis).
+     - **`ssid="Votre_SSID"`** ou **`ssid="Premier_SSID"`** et **`ssid="Deuxieme_SSID"`** : Remplacez ces valeurs par le(s) nom(s) des réseaux Wi-Fi.
+     - **`psk="Votre_Mot_de_passe"`** ou **`psk="Premier_Mot_de_passe"`** et **`psk="Deuxieme_Mot_de_passe"`** : Remplacez ces valeurs par le(s) mot(s) de passe respectif(s).
+     - **`key_mgmt=WPA-PSK`** : Ce paramètre indique que le réseau utilise WPA2, ce qui est standard pour la plupart des réseaux Wi-Fi domestiques.
+
+3. **(Facultatif) Priorité des réseaux** :
+   - Si vous avez configuré plusieurs réseaux et souhaitez que le Raspberry Pi préfère certains réseaux lorsqu'ils sont disponibles, vous pouvez ajouter une ligne `priority=N` dans chaque bloc `network`, où `N` est un nombre entier. Plus le nombre est élevé, plus la priorité est haute.
+
+   Exemple :
+
+   ```sh
+   network={
+       ssid="Premier_SSID"
+       psk="Premier_Mot_de_passe"
+       key_mgmt=WPA-PSK
+       priority=2
+   }
+
+   network={
+       ssid="Deuxieme_SSID"
+       psk="Deuxieme_Mot_de_passe"
+       key_mgmt=WPA-PSK
+       priority=1
+   }
+   ```
+
+   Dans cet exemple, `Premier_SSID` sera préféré à `Deuxieme_SSID` si les deux sont disponibles.
+
+#### 4. Activez SSH (facultatif)
+
+1. **Pour activer SSH dès le premier démarrage**, créez un fichier vide nommé `ssh` (sans extension) dans la partition `boot`. Cela activera le service SSH automatiquement.
+
+#### 5. Sauvegardez et éjectez
+
+1. **Sauvegardez le fichier `wpa_supplicant.conf`** et fermez l'éditeur de texte.
+2. **Éjectez la carte SD** de votre ordinateur en toute sécurité.
+
+#### 6. Démarrez le Raspberry Pi 4
+
+1. **Insérez la carte SD** dans le Raspberry Pi 4.
+2. **Allumez le Raspberry Pi**. Lors du démarrage, il lira le fichier `wpa_supplicant.conf` et se connectera au(x) réseau(x) Wi-Fi configuré(s). Si vous avez activé SSH, vous pourrez vous connecter au Raspberry Pi via l'adresse IP sur le réseau.
+
+Cette méthode vous permet de configurer un ou plusieurs réseaux Wi-Fi de manière flexible pour votre Raspberry Pi 4, avec la possibilité d'établir des priorités entre les réseaux si nécessaire.
 
 
 # Préparation du raspberry pi et configuration
@@ -43,7 +136,7 @@ sudo apt update && sudo apt upgrade -y
 Installez Docker en exécutant la commande suivante :
 
 ```sh
-curl -fsSL https://get.docker.com | sh
+curl https://get.docker.com | sh
 ```
 
 ## Étape 3 : Installation de Docker Compose
@@ -99,7 +192,7 @@ cd mowgli-docker
 sudo nano .env
 ```
 
-2. Remplacez les valeurs `ROS_IP` et `MOWER_IP` par l'adresses IP de votre raspberry :
+2. Remplacez les valeurs `ROS_IP` et `MOWER_IP` par l'adresses IP de votre raspberry (pour info le pavé numerique ne fonctionne pas , déplacer le curseur avec les fleche de navigation) :
 
 ```sh
 # ROS_IP est l'IP de la machine exécutant le conteneur Docker
@@ -123,7 +216,7 @@ Ouvrez le fichier `docker-compose.yaml` :
 sudo nano docker-compose.yaml
 ```
 
-Remplacez le contenu par le suivant ou modifier simplement les lignes indiquer ci-dessous par cette fleche <============= :
+Remplacez le contenu par le suivant ou modifier simplement les lignes indiquer ci-dessous par cette fleche <============= (pour info le pavé numerique ne fonctionne pas , déplacer le curseur avec les fleche de navigation):
 
 ```yaml
 version: '3'
@@ -286,6 +379,7 @@ Démarrez les conteneurs Docker (il faut etre dans le répertoire mowgli-docker,
 ```sh
 sudo docker-compose up -d
 ```
+Allez vous faire un café car cette partie peut etre longue, ça télécharge tout les fichier des conteneurs et donc dépend de la vitesse de votre connexion internet.
 
 ## Étape 9 : Comment arrêtez et mettre a jour les Conteneurs si besoin
 
@@ -316,7 +410,19 @@ sudo docker-compose logs -f
 Pour sortir des logs, faites Ctrl "c"
 
 
-Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant configuré et prêt à être utilisé, enfin presque car il reste la configuration de l'application et la créations des cartes de tontes !
+## Étape 11 : Configuration de démarrage du robot
+
+
+Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration de l'application et la créations des cartes de tontes !
+
+Pour ça rendez vous  [ici](hhttps://openmower.de/docs/software-setup/record-a-map/)  en version anglaise sur le site officiel mais je vais vous détailler les grandes ligne  : 
+
+
+
+***réaliser la Suite...***
+
+
+
 
 ## Bonus : 
 
