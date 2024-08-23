@@ -412,8 +412,35 @@ Pour sortir des logs, faites Ctrl "c"
 
 ## Étape 11 : Configuration de démarrage du robot
 
-
 Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration de l'application et la créations des cartes de tontes !
+
+Maintenant vous devriez avoir accès a ces 2 adresses : 
+
+```plaintext
+Tableau de bord détaillé avec paramètre : 
+
+** http://adresse IP de votre raspberry pi:4006 **
+
+```
+
+```plaintext
+
+Tableau de bord simplifier pour piloter et lancer/arrêter les tontes manuellement : 
+
+** http://adresse IP de votre raspberry pi:4005 **
+
+```
+
+Pour commencer il faut parametrer votre position/coordonnée GPS pour centrer la carte de tonte sur ce point, ça ce passe dans les settings a l'adresse : 
+
+```plaintext
+Tableau de bord détaillé avec paramètre : 
+
+** http://adresse IP de votre raspberry pi:4006 **
+
+```
+![capture ecran openmower](#)
+
 
 Pour ça rendez vous  [ici](hhttps://openmower.de/docs/software-setup/record-a-map/)  en version anglaise sur le site officiel mais je vais vous détailler les grandes ligne  : 
 
@@ -432,17 +459,17 @@ Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil d
 - Support Raspberry [Pi4](https://makerworld.com/en/@juditech3d)
 - Support [F9P](https://makerworld.com/en/@juditech3d)
 
-Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Rendez-vous [ICI](#)
+Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une demande [ICI](#)
 
 
 ## Firmware personnalisés Mowgli compilé par mes propre soins.
 
 Les firmware disponible ici sont a utilisés a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
 
-Attention : veuillez prendre soin de choisir le firmware qui correspond au modèle de votre carte mère, choisir le modèle 500 ou 500B ne suffit pas.
+Attention : veuillez prendre soin de choisir le firmware qui correspond au modèle de votre carte mère.
 
 - Firmware d'origine Yardforce 500 [Firmware Y500-Origine](#)
-- Firmware d'origine Yardforce 500B [Firmware Y500B-Origine](#)
+- Firmware d'origine Yardforce 500B [Firmware Y500B-Origine](https://mega.nz/file/LctRlDjA#o_DlA1pqDVFBnv7Dm9BDvJAm1jmBUdYOCP_2UW77QMc) mise à jour le 23/08/2024
 - Firmware personnalisé Yardforce 500 [Firmware Y500-Mowgli](#)
 - Firmware personnalisé Yardforce 500B [Firmware Y500-Mowgli](#)
 
