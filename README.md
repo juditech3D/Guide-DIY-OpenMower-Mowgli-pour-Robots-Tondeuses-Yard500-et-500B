@@ -104,7 +104,7 @@ Pour plus d'informations, visitez les pages :
 
    Dans cet exemple, `Premier_SSID` sera préféré à `Deuxieme_SSID` si les deux sont disponibles.
 
-#### 4. Activez SSH (facultatif)
+#### 4. Activez SSH (OBLIGATOIRE)
 
 1. **Pour activer SSH dès le premier démarrage**, créez un fichier vide nommé `ssh` (sans extension) dans la partition `boot`. Cela activera le service SSH automatiquement.
 
@@ -116,10 +116,15 @@ Pour plus d'informations, visitez les pages :
 #### 6. Démarrez le Raspberry Pi 4
 
 1. **Insérez la carte SD** dans le Raspberry Pi 4.
-2. **Allumez le Raspberry Pi**. Lors du démarrage, il lira le fichier `wpa_supplicant.conf` et se connectera au(x) réseau(x) Wi-Fi configuré(s). Si vous avez activé SSH, vous pourrez vous connecter au Raspberry Pi via l'adresse IP sur le réseau.
+2. **Allumez le Raspberry Pi**. Lors du démarrage, il lira le fichier `wpa_supplicant.conf` et se connectera au(x) réseau(x) Wi-Fi configuré(s). Si vous avez activé SSH, vous pourrez vous connecter au Raspberry Pi via l'adresse IP sur le réseau : pour ça vous pouvez la trouver via votre box opérateur ou via un soft, moi j'utilise [Advanced IP Scanner](https://www.advanced-ip-scanner.com/fr/), il aura normalement le nom que vous lui aurez donner, avec comme nom de fabricant = Rasberry Pi ou similaire
+
+![Advanced IP Scanner](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Advanced%20ip%20scanner/Advanced%20ip%20scanner.png)
 
 Cette méthode vous permet de configurer un ou plusieurs réseaux Wi-Fi de manière flexible pour votre Raspberry Pi 4, avec la possibilité d'établir des priorités entre les réseaux si nécessaire.
 
+```plaintext
+N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry pi via votre box pour qu'il soit toujours accessible.
+```
 
 # Préparation du raspberry pi et configuration
 
