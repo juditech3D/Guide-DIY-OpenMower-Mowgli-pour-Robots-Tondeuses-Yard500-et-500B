@@ -439,7 +439,7 @@ Tableau de bord détaillé avec paramètre :
 ** http://adresse IP de votre raspberry pi:4006 **
 
 ```
-![capture ecran openmower](#)
+![capture ecran openmower](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Openmower%20app/capture%20ecran%20openmower%201.png)
 
 
 Pour ça rendez vous  [ici](hhttps://openmower.de/docs/software-setup/record-a-map/)  en version anglaise sur le site officiel mais je vais vous détailler les grandes ligne  : 
