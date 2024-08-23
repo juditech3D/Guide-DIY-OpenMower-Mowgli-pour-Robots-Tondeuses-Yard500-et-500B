@@ -123,7 +123,8 @@ Pour plus d'informations, visitez les pages :
 Cette méthode vous permet de configurer un ou plusieurs réseaux Wi-Fi de manière flexible pour votre Raspberry Pi 4, avec la possibilité d'établir des priorités entre les réseaux si nécessaire.
 
 ```plaintext
-N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry pi via votre box pour qu'il soit toujours accessible.
+N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry 
+pi via votre box pour qu'il soit toujours accessible.
 ```
 
 # Préparation du raspberry pi et configuration
@@ -210,7 +211,7 @@ IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
 
 Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
 
-## Étape 7 : Mise à jour de docker-compose.yaml ( mettre à jour suite a une erreur comme quoi le fichier était obsolète donc obligatoire sinon vous aurez une erreur et vous ne pourrez pas démarrer les dockers)
+## Étape 7 : Mise à jour de docker-compose.yaml ( mettre à jour suite a une erreur comme quoi le fichier était obsolète donc obligatoire si vous avez une erreur à l'étapes 8 sinon vous ne pourrez pas démarrer les dockers)
 
 ![Erreur docker-compose.yaml](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Solarputty/Erreur%20docker-compose.yaml.png)
 
@@ -436,7 +437,7 @@ Tableau de bord simplifier pour piloter et lancer/arrêter les tontes manuelleme
 
 ```
 
-Pour commencer il faut parametrer votre position/coordonnée GPS pour centrer la carte de tonte sur ce point, ça ce passe dans les settings a l'adresse : 
+1. Pour commencer il faut parametrer votre position/coordonnée GPS pour centrer la carte de tonte sur ce point, ça ce passe dans les settings a l'adresse : 
 
 ```plaintext
 Tableau de bord détaillé avec paramètre : 
@@ -446,19 +447,41 @@ Tableau de bord détaillé avec paramètre :
 ```
 ![capture ecran openmower](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Openmower%20app/capture%20ecran%20openmower%201.png)
 
+2. Ensuite, entrer vos coordonnées gps dans "Datum" : latitude et longitude, placer le comme vous voulez en essayant de le placer le plus proche de votre futur zone de tonte, moi je l'ai placé au niveau de mon dock/chargeur.Pour les coordonnées j'ai utilisé ce site [Coordonnées GPS.fr](https://www.coordonnees-gps.fr).
 
-Pour ça rendez vous  [ici](hhttps://openmower.de/docs/software-setup/record-a-map/)  en version anglaise sur le site officiel mais je vais vous détailler les grandes ligne  : 
+![capture ecran openmower](#)
+
+3. Après section suivante, "NTRIP" : ne modifer que la case "NTRIP server endpoint", c'est la ou vous allez renseigner la base rtk la plus proche de chez vous, pour la trouver c'est [<< ICI >>](https://lvawebprojects.ovh/rtk/rtk.php).Il suffira juste de rentrer l'identifiant de la base (**en gras** colonne du milieu)
+
+![capture ecran openmower](#)
+
+4. Partie "Mower"
+> ***réaliser la Suite...***
+
+![capture ecran openmower](#)
+
+5. Partie "Positioning"
+> ***réaliser la Suite...***
+
+![capture ecran openmower](#)
+
+6. Partie "Docking"
+> ***réaliser la Suite...***
+
+![capture ecran openmower](#)
 
 
 
-***réaliser la Suite...***
+7. Et pour finir rendez vous  [ici](https://openmower.de/docs/software-setup/record-a-map/)  en version anglaise pour plus de détail sur le site officiel mais je vais vous détailler les grandes ligne ici : 
+
+> ***réaliser la Suite...***
+
+### ## **# Attention : si vous modifier votre map après la première tonte, il faudra redémarrer les dockers pour qu'elle soit pris en compte**
 
 
+# ** Bonus ** 
 
-
-## Bonus : 
-
-## Pièces 3D
+## ## Pièces 3D
 Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil de les imprimer en PETG ou ABS)
 
 - Support Raspberry [Pi4](https://makerworld.com/en/@juditech3d)
@@ -467,7 +490,7 @@ Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil d
 Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une demande [ICI](#)
 
 
-## Firmware personnalisés Mowgli compilé par mes propre soins.
+## ## Firmware personnalisés Mowgli compilé par mes propre soins.
 
 Les firmware disponible ici sont a utilisés a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
 
