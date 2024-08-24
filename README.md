@@ -451,7 +451,7 @@ Tableau de bord détaillé avec paramètre :
 
 ![capture ecran openmower](#)
 
-3. Après section suivante, "NTRIP" : ne modifer que la case "NTRIP server endpoint", c'est la ou vous allez renseigner la base rtk la plus proche de chez vous, pour la trouver c'est [<< ICI >>](https://lvawebprojects.ovh/rtk/rtk.php).Il suffira juste de rentrer l'identifiant de la base (**en gras** colonne du milieu)
+3. Après section suivante, "NTRIP" : ne modifer que la case "NTRIP server endpoint", c'est la ou vous allez renseigner la base rtk la plus proche de chez vous, pour la trouver c'est [<< ICI - Liste des bases rtk le plus proche >>](https://lvawebprojects.ovh/rtk/rtk.php).Il suffira juste de rentrer l'identifiant de la base (**en gras** colonne du milieu).Il parait evident de choisir ceux qui sont actif.
 
 ![capture ecran openmower](#)
 
@@ -487,7 +487,7 @@ Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil d
 - Support Raspberry [Pi4](https://makerworld.com/en/@juditech3d)
 - Support [F9P](https://makerworld.com/en/@juditech3d)
 
-Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une demande [ICI](#)
+Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une demande [ICI](https://t.me/+mOlwROGsP3AyYTlk)
 
 
 ## ## Firmware personnalisés Mowgli compilé par mes propre soins.
