@@ -415,8 +415,37 @@ sudo docker-compose logs -f
 ```
 Pour sortir des logs, faites Ctrl "c"
 
+## Étape 11 : Compilation et injection du Firmware Mowgli dans la carte mère du robot.
 
-## Étape 11 : Configuration de démarrage du robot
+Cette étape est bien plus simple qu'il n'y paraît.
+Pour cela on utilise [**Visual studio code**](https://code.visualstudio.com)
+### 1. Téléchargement du repo Github
+Normalement on utilise le même pour les 2 versions mais un problème (au 25-08-2024) sur le 500B oblige a en utiliser un différent.J'ai référencé ici les liens que j'ai utilisé et qui fonctionne.
+
+Pour le 500 : 
+https://github.com/cedbossneo/Mowgli/tree/main
+
+**Lien direct : https://github.com/cedbossneo/Mowgli/archive/refs/heads/main.zip
+> ***réaliser la Suite...***
+
+Pour le 500B : 
+https://github.com/jeremysalwen/Mowgli/tree/yardforce-500b
+
+**Lien direct : https://github.com/jeremysalwen/Mowgli/archive/refs/heads/yardforce-500b.zip
+
+> ***réaliser la Suite...***
+
+### 2. Compilation du repo Github
+
+> ***réaliser la Suite...***
+
+### 3. Injection du firmware
+
+Pour une raison quelquonque chez certains l'injection du firmware via vscode ne fonctionne pas, il est possible de l'injecter via le soft  [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA) : 
+
+> ***réaliser la Suite...***
+
+## Étape 12 : Configuration de démarrage du robot
 
 Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration su GPS, de l'application et la créations des cartes de tontes !
 
@@ -506,6 +535,8 @@ Attention : veuillez prendre soin de choisir le firmware qui correspond au modè
 - Firmware d'origine Yardforce 500B [Firmware Y500B-Origine](https://mega.nz/file/LctRlDjA#o_DlA1pqDVFBnv7Dm9BDvJAm1jmBUdYOCP_2UW77QMc) mise à jour le 23/08/2024
 - Firmware personnalisé Yardforce 500 [Firmware Y500-Mowgli](#)
 - Firmware personnalisé Yardforce 500B [Firmware Y500-Mowgli](#)
+
+Pour injecté le firmware d'origine j'ai utilisé le soft [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA)
 
   
 ## ## Support me / Soutenez moi
