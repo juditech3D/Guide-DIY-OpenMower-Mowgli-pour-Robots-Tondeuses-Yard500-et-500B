@@ -504,5 +504,5 @@ Attention : veuillez prendre soin de choisir le firmware qui correspond au modè
   
 ## ## Support me / Soutenez moi
 
-![https://buymeacoffee.com/juditech3d](#)
+![https://buymeacoffee.com/juditech3d](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Soutien/bmc_qr.png?raw=true)
 [Buy me a coffee](https://buymeacoffee.com/juditech3d)
