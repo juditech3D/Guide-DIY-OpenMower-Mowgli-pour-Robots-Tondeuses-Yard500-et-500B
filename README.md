@@ -418,7 +418,13 @@ Pour sortir des logs, faites Ctrl "c"
 
 ## Étape 11 : Configuration de démarrage du robot
 
-Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration de l'application et la créations des cartes de tontes !
+Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration su GPS, de l'application et la créations des cartes de tontes !
+
+### 1. Configuration du gps (RTK F9P ou similaire)
+
+Suivez ce [lien](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-gps/) pour configurer la carte GPS (en anglais)
+
+### 2. Configuration du robot (Openmower App)
 
 Maintenant vous devriez avoir accès a ces 2 adresses : 
 
@@ -504,5 +510,11 @@ Attention : veuillez prendre soin de choisir le firmware qui correspond au modè
   
 ## ## Support me / Soutenez moi
 
-![https://buymeacoffee.com/juditech3d](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Soutien/bmc_qr.png?raw=true)
+![https://buymeacoffee.com/juditech3d](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Soutien/bmc_qr-mini.png?raw=true)
 [Buy me a coffee](https://buymeacoffee.com/juditech3d)
+
+[Youtube @juditech3D](https://www.youtube.com/@juditech3d)
+
+[TikTok @juditech3D](https://www.tiktok.com/@juditech3d)
+
+[Instagram Juditech3D](https://www.instagram.com/juditech3d/)
