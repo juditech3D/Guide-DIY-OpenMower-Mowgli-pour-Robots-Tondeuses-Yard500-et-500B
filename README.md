@@ -1,6 +1,7 @@
 # Guide OpenMower Mowgli DIY Robot Tondeuse Yard 500 et 500B
 
-Bienvenue dans ce guide complet pour configurer et déployer votre robot tondeuse OpenMower Mowgli Yard 500 et 500B en français, basé sur mon expérience de la construction du robot Yardforce 500B.
+Bienvenue dans ce guide complet pour configurer et déployer votre robot tondeuse OpenMower Mowgli Yardforce 500 et 500B en français, basé sur mon expérience de la construction du robot Yardforce 500B.
+Il est dédié aux yardforce 500 et 500B avec sa carte mère d'origine ( avec stm32 F103 et F402). Il pourrait peut-être être applicable pour d'autres modèles avec les même carte mère.
 
 **Attention :** Ce guide est un work in progress et est en cours de rédaction.
 
