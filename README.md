@@ -1,25 +1,33 @@
-# Guide OpenMower Mowgli DIY Robot Tondeuse Yard 500 et 500B
+# Guide OpenMower Mowgli DIY Robot Tondeuse Yardforce 500 et 500B
 
-Bienvenue dans ce guide complet pour configurer et déployer votre robot tondeuse OpenMower Mowgli Yard 500 et 500B en français, basé sur mon expérience de la construction du robot Yardforce 500B.
+Bienvenue dans ce guide détaillé en français pour la configuration et le déploiement de votre robot tondeuse OpenMower Mowgli Yardforce 500 et 500B. Ce tutoriel s'appuie sur mon expérience personnelle avec la construction du modèle Yardforce 500B.
 
-**Attention :** Ce guide est un work in progress et est en cours de rédaction.
+**Ce guide est spécifiquement conçu pour les modèles Yardforce 500 et 500B équipés de leur carte mère d'origine (STM32 F103 et F402). Il peut éventuellement être applicable à d'autres modèles utilisant les mêmes cartes mères.**
 
-**Avant de commencer, assurez-vous de bien comprendre les avertissements et les prérequis.**
+**Attention :** Ce guide est en cours de rédaction et évolue au fil du temps. Il est donc possible que certaines informations ne soient pas complètement à jour.
 
-Pour plus d'informations, visitez les pages :  
+**Avant de commencer, il est essentiel de bien comprendre les avertissements et les prérequis nécessaires.**
+
+Pour bien comprendre et réussir à suivre ce guide, il est important de visiter les ressources suivantes : 
 - [Page d'accueil d'OpenMower](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-robot/photo-guide/)
 - [Fork Mowgli](https://github.com/cedbossneo/Mowgli)
 - [Mowgli Docker](https://github.com/CedBossNeo/mowgli-docker)
 - [Groupe d'entraide telegram français du fork Mowgli](https://t.me/+x6U3UwU5lB4yOWNk)
 
-## Prérequis (et matériels que j'ai utilisés)
+Ces liens vous fourniront des informations cruciales qui vous aideront à mieux comprendre les étapes et les concepts abordés dans ce guide.
+
+## Prérequis pour utilisé ce guide (et matériels que j'ai utilisés)
 
 - Raspberry Pi avec Pi OS installé ( cela suppose que vous avez déja créer votre sd ou ssd (pour le pi 4) et qu'il démarre sans problème sur le pi)
-- Carte GPS/Rtk [F9P](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers) avec son [cable d'antenne](https://fr.aliexpress.com/item/1005004690761874.html?spm=a2g0o.order_list.order_list_main.23.27185e5bO83Ive&gatewayAdapt=glo2fra) et son antenne [Bt560](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) mais ayant eu des difficulté de réception de mon coté j'ai utilisé la Bt603 qui est plus puissante mais plus chère.
-- 
-- Putty ou similaire (moi j'ai utilisé [solarputty](https://www.solarwinds.com/free-tools/solar-putty))
-- Connaissances de base en ligne de commande ( pas obligatoire car je détails tout ici )
+
+- Carte GPS/Rtk [F9P ardusimple sans entête](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers) avec son [cable d'antenne](https://fr.aliexpress.com/item/1005004690761874.html?spm=a2g0o.order_list.order_list_main.23.27185e5bO83Ive&gatewayAdapt=glo2fra) ou sa base [BT-M61AJ3](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) et son antenne [Bt560](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) mais ayant eu des difficulté de réception ( arbres et buissons divers) de mon coté j'ai utilisé la [Bt603](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) qui est plus puissante mais plus chère.
+
+- Putty ou similaire ( moi j'ai utilisé [solarputty](https://www.solarwinds.com/free-tools/solar-putty) ), il y a aussi [Raspberry Pi Connect](https://connect.raspberrypi.com)
+
+- Connaissances de base en ligne de commande conseillé ( pas obligatoire car je détails tout ici )
+
 - Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début, mais attention l'IP qu'il faudra utiliser dans la suite du tuto est bien celle du wifi qui elle, est différente) 
+
 
 # Préparation de la carte sd/SSD du raspberry pi
 
