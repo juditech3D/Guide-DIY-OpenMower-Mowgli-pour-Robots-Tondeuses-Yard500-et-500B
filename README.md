@@ -4,6 +4,18 @@ Bienvenue dans ce guide détaillé en français pour la configuration et le dép
 
 **Ce guide est spécifiquement conçu pour les modèles Yardforce 500 et 500B équipés de leur carte mère d'origine (STM32 F103 et F402). Il peut éventuellement être applicable à d'autres modèles utilisant les mêmes cartes mères.**
 
+## **Avertissement : Dans le cadre de ce tutoriel, le clavier et les voyants situés sur le capot du Yardforce ne seront pas pleinement fonctionnels. Cela pourrait être problématique pour certains utilisateurs qui comptent sur ces fonctionnalités.**
+
+**Pour le modèle Yardforce 500, certains voyants fonctionnent malgré tout sans modification du firmware du tableau de bord, notamment :**
+
+- Le voyant de levage
+- Le voyant de batterie faible
+- Le voyant de charge
+
+Ces fonctionnalités sont opérationnelles sans qu'il soit nécessaire de changer le firmware du tableau de bord.
+
+## **En revanche, pour le modèle Yardforce 500B, le clavier et les voyants sur le capot ne seront pas fonctionnels avec ce tutoriel, en tout cas pour l'instant.** ##
+
 **Attention :** Ce guide est en cours de rédaction et évolue au fil du temps. Il est donc possible que certaines informations ne soient pas complètement à jour.
 
 **Avant de commencer, il est essentiel de bien comprendre les avertissements et les prérequis nécessaires.**
@@ -112,7 +124,7 @@ Ces liens vous fourniront des informations cruciales qui vous aideront à mieux 
 
    Dans cet exemple, `Premier_SSID` sera préféré à `Deuxieme_SSID` si les deux sont disponibles.
 
-#### 4. Activez SSH (OBLIGATOIRE)
+#### 4. Activez SSH ( OBLIGATOIRE pour la suite du tutoriel )
 
 1. **Pour activer SSH dès le premier démarrage**, créez un fichier vide nommé `ssh` (sans extension) dans la partition `boot`. Cela activera le service SSH automatiquement.
 
