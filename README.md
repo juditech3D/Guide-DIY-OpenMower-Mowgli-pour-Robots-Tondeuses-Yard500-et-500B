@@ -518,11 +518,15 @@ Tableau de bord détaillé avec paramètre :
 
 2. Ensuite, entrer vos coordonnées gps dans "Datum" : latitude et longitude, placer le comme vous voulez en essayant de le placer le plus proche de votre futur zone de tonte, moi je l'ai placé au niveau de mon dock/chargeur.Pour les coordonnées j'ai utilisé ce site [Coordonnées GPS.fr](https://www.coordonnees-gps.fr). Vous pouvez utiliser aussi le site indiqué ci-dessous au point #3.
 
-![capture ecran openmower](#)
+![capture ecran openmower](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Coordonn%C3%A9es%20GPS/coordonn%C3%A9es%20gps%20openmower%201.png?raw=true)
 
-3. Après section suivante, "NTRIP" : ne modifer que la case "NTRIP server endpoint", c'est la ou vous allez renseigner la base rtk la plus proche de chez vous, pour la trouver c'est [<< ICI - Liste des bases rtk le plus proche >>](https://lvawebprojects.ovh/rtk/rtk.php).Il suffira juste de rentrer l'identifiant de la base (**en gras** colonne du milieu).Il parait evident de choisir ceux qui sont actif.
+3. Après section suivante, "NTRIP" : ne modifer que la case "NTRIP server endpoint", c'est la ou vous allez renseigner la base rtk la plus proche de chez vous ( l'idéale est - de 20km), pour la trouver c'est [<< ICI - Liste des bases rtk le plus proche >>](https://lvawebprojects.ovh/rtk/rtk.php).Il suffira juste de rentrer l'identifiant de la base (**en gras** colonne du milieu).Il parait evident de choisir ceux qui sont actif.
 
-![capture ecran openmower](#)
+![capture ecran openmower](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Coordonn%C3%A9es%20GPS/coordonn%C3%A9es%20gps%20openmower%202.png?raw=true)
+
+# Important ⚠️
+
+⚠️ **Attention :  Pour des raisons de sécurité évidente, ne partagez jamais votre position réelle avec d'autres personnes.** ⚠️
 
 4. Partie "Mower"
 > ***réaliser la Suite...***
