@@ -4,7 +4,8 @@ Bienvenue dans ce guide détaillé en français pour la configuration et le dép
 
 **Ce guide est spécifiquement conçu pour les modèles Yardforce 500 et 500B équipés de leur carte mère d'origine (STM32 F103 et F402). Il peut éventuellement être applicable à d'autres modèles utilisant les mêmes cartes mères.**
 
-## **Avertissement : Dans le cadre de ce tutoriel, le clavier et les voyants situés sur le capot du Yardforce ne seront pas pleinement fonctionnels. Cela pourrait être problématique pour certains utilisateurs qui comptent sur ces fonctionnalités.**
+## **⚠️ Avertissement : Dans le cadre de ce tutoriel, le clavier et les voyants situés sur le capot du Yardforce ne seront pas pleinement fonctionnels. Cela pourrait être problématique pour certains utilisateurs qui comptent sur ces fonctionnalités.** ##
+
 
 **Pour le modèle Yardforce 500, certains voyants fonctionnent malgré tout sans modification du firmware du tableau de bord, notamment :**
 
@@ -14,9 +15,11 @@ Bienvenue dans ce guide détaillé en français pour la configuration et le dép
 
 Ces fonctionnalités sont opérationnelles sans qu'il soit nécessaire de changer le firmware du tableau de bord.
 
-## **En revanche, pour le modèle Yardforce 500B, le clavier et les voyants sur le capot ne seront pas fonctionnels avec ce tutoriel, en tout cas pour l'instant.** ##
+## **⚠️ En revanche, pour le modèle Yardforce 500B, le clavier et les voyants sur le capot ne seront pas fonctionnels avec ce tutoriel, en tout cas pour l'instant.** ##
 
-**Attention :** Ce guide est en cours de rédaction et évolue au fil du temps. Il est donc possible que certaines informations ne soient pas complètement à jour.
+# Important ⚠️
+
+⚠️**Attention :** Ce guide est en cours de rédaction et évolue au fil du temps. Il est donc possible que certaines informations ne soient pas complètement à jour.⚠️
 
 **Avant de commencer, il est essentiel de bien comprendre les avertissements et les prérequis nécessaires.**
 
@@ -40,6 +43,9 @@ Ces liens vous fourniront des informations cruciales qui vous aideront à mieux 
 
 - Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début, mais attention l'IP qu'il faudra utiliser dans la suite du tuto est bien celle du wifi qui elle, est différente) 
 
+# Important ⚠️
+
+⚠️ Pour que le robot fonctionne, il faut OBLIGATOIREMENT un réseau Wifi disponible sur toute la surface qe vous voulez tondre ⚠️
 
 # Préparation de la carte sd/SSD du raspberry pi
 
@@ -124,7 +130,7 @@ Ces liens vous fourniront des informations cruciales qui vous aideront à mieux 
 
    Dans cet exemple, `Premier_SSID` sera préféré à `Deuxieme_SSID` si les deux sont disponibles.
 
-#### 4. Activez SSH ( OBLIGATOIRE pour la suite du tutoriel )
+#### 4. Activez SSH ( ⚠️ OBLIGATOIRE pour la suite du tutoriel )
 
 1. **Pour activer SSH dès le premier démarrage**, créez un fichier vide nommé `ssh` (sans extension) dans la partition `boot`. Cela activera le service SSH automatiquement.
 
@@ -142,10 +148,9 @@ Ces liens vous fourniront des informations cruciales qui vous aideront à mieux 
 
 Cette méthode vous permet de configurer un ou plusieurs réseaux Wi-Fi de manière flexible pour votre Raspberry Pi 4, avec la possibilité d'établir des priorités entre les réseaux si nécessaire.
 
-```plaintext
-N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry 
-pi via votre box pour qu'il soit toujours accessible.
-```
+# Important ⚠️
+
+⚠️ N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry pi via votre box pour qu'il soit toujours accessible.⚠️
 
 # Préparation du raspberry pi et configuration
 
@@ -469,6 +474,11 @@ Pour une raison quelquonque chez certains l'injection du firmware via vscode ne 
 
 Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration su GPS, de l'application et la créations des cartes de tontes !
 
+# Important ⚠️
+
+⚠️ Attention : Ne modifiez que les paramètres spécifiquement indiqués dans ce tutoriel. Toute modification de tout autre paramètre pourrait entraîner un dysfonctionnement des applications et/ou du robot.⚠️
+
+
 ### 1. Configuration du gps (RTK F9P ou similaire)
 
 Suivez ce [lien](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-gps/) pour configurer la carte GPS (en anglais)
@@ -486,13 +496,17 @@ Tableau de bord détaillé avec paramètre :
 
 ```plaintext
 
-Tableau de bord simplifier pour piloter et lancer/arrêter les tontes manuellement : 
+Tableau de bord simplifié (adapté pour tablette ou smartphone) pour piloter et lancer/arrêter les tontes manuellement : 
 
 ** http://adresse IP de votre raspberry pi:4005 **
 
 ```
 
 1. Pour commencer il faut parametrer votre position/coordonnée GPS pour centrer la carte de tonte sur ce point, ça ce passe dans les settings a l'adresse : 
+
+# Important ⚠️
+
+⚠️ Attention : Pour minimiser les erreurs, je vous recommande d'effectuer la configuration via la page web "4006" en utilisant un PC plutôt qu'un téléphone.⚠️
 
 ```plaintext
 Tableau de bord détaillé avec paramètre : 
@@ -502,7 +516,7 @@ Tableau de bord détaillé avec paramètre :
 ```
 ![capture ecran openmower](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Openmower%20app/capture%20ecran%20openmower%201.png)
 
-2. Ensuite, entrer vos coordonnées gps dans "Datum" : latitude et longitude, placer le comme vous voulez en essayant de le placer le plus proche de votre futur zone de tonte, moi je l'ai placé au niveau de mon dock/chargeur.Pour les coordonnées j'ai utilisé ce site [Coordonnées GPS.fr](https://www.coordonnees-gps.fr).
+2. Ensuite, entrer vos coordonnées gps dans "Datum" : latitude et longitude, placer le comme vous voulez en essayant de le placer le plus proche de votre futur zone de tonte, moi je l'ai placé au niveau de mon dock/chargeur.Pour les coordonnées j'ai utilisé ce site [Coordonnées GPS.fr](https://www.coordonnees-gps.fr). Vous pouvez utiliser aussi le site indiqué ci-dessous au point #3.
 
 ![capture ecran openmower](#)
 
