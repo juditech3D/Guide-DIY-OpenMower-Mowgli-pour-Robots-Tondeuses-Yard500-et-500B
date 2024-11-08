@@ -309,9 +309,9 @@ https://github.com/cedbossneo/Mowgli/tree/main
 > ***réaliser la Suite...***
 
 Pour le 500B : 
-https://github.com/jeremysalwen/Mowgli/tree/yardforce-500b
+https://github.com/Nekraus/Mowgli/tree/yardforce-500b
 
-**Lien direct : https://github.com/jeremysalwen/Mowgli/archive/refs/heads/yardforce-500b.zip
+**Lien direct : https://github.com/Nekraus/Mowgli/archive/refs/heads/yardforce-500b.zip
 
 > ***réaliser la Suite...***
 
