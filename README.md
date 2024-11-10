@@ -254,14 +254,31 @@ Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl 
 
 
 
-## Étape 6 : Démarrage des Conteneurs
+## Étape 6 : Lancement des Conteneurs
 
-Démarrez les conteneurs Docker (il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker") :
+1. Lancez les conteneurs Docker (assurez-vous d’être dans le répertoire « mowgli-docker ». Si ce n’est pas le cas, exécutez la commande « cd mowgli-docker ») :
 
 ```sh
 sudo docker compose up -d
 ```
-Allez vous faire un café car cette partie peut etre longue, ça télécharge tout les fichier des conteneurs et donc dépend de la vitesse de votre connexion internet.
+
+Prenez une pause café, car cette étape peut être longue. Le téléchargement des fichiers des conteneurs dépend de la vitesse de votre connexion Internet.
+
+2. # ⚠️ Important ⚠️
+
+⚠️ Attention : Depuis le 12/10/2024, il est nécessaire de mettre à jour un fichier de configuration pour assurer le bon fonctionnement de votre robot. Sans cela, le robot risque de ne pas fonctionner correctement. Pour ce faire, éditez le fichier `mower_config.sh` (assurez-vous d’être dans le répertoire « mowgli-docker ». Si ce n’est pas le cas, exécutez « cd mowgli-docker ») :
+
+```sh
+sudo nano config/om/mower_config.sh
+```
+
+Ajoutez la ligne suivante ou modifiez la si présente : `export OM_NO_COMMS="true"`. Ensuite, appuyez sur « Ctrl + o » pour enregistrer, validez avec la touche « Entrée », puis appuyez sur « Ctrl + x » pour quitter l’éditeur.
+
+Enfin, redémarrez le Raspberry Pi :
+```sh
+sudo reboot
+```
+
 
 ## Étape 7 : Comment arrêtez et mettre a jour les Conteneurs si besoin
 
