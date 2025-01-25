@@ -33,7 +33,7 @@ Pour bien comprendre et réussir à suivre ce guide, il est important de visiter
 
 Ces liens vous fourniront des informations cruciales qui vous aideront à mieux comprendre les étapes et les concepts abordés dans ce guide.
 
-## Prérequis pour utilisé ce guide (et matériels que j'ai utilisés)
+## Prérequis pour utiliser ce guide (et matériels que j'ai utilisés)
 
 - Module d'alimentation DC/DC [LM2596S](https://amzn.eu/d/jhNev6j)
 
@@ -71,7 +71,7 @@ Pour le wifi et le SSH, 2 solutions :
 
   <summary> Dépliez pour voir </summary>
 
-1. **Gravez l'image de Raspberry Pi OS** sur la carte SD en utilisant un outil comme Raspberry Pi Imager ou Balena Etcher.
+1. **Gravez l'image de Raspberry Pi OS (64 bits)** sur la carte SD en utilisant un outil comme Raspberry Pi Imager ou Balena Etcher.
 2. **Insérez la carte SD** dans votre ordinateur après avoir gravé l'image.
 
 #### 2. Accédez à la partition `boot`
@@ -210,7 +210,11 @@ SUBSYSTEM=="tty" ATTRS{product}=="Mowgli", SYMLINK+="mowgli"
 SUBSYSTEM=="tty" ATTRS{idVendor}=="1546" ATTRS{idProduct}=="01a9", SYMLINK+="gps"
 # ESP USB CDC - RTK1010Board
 SUBSYSTEM=="tty" ATTRS{idVendor}=="303a" ATTRS{idProduct}=="4001", SYMLINK+="gps"
+# UM982 - WittMotion WTRTK-982
+SUBSYSTEM=="tty" ATTRS{idVendor}=="1a86" ATTRS{idProduct}=="7523", SYMLINK+="gps"
 ```
+
+(si GPS spécifique, utilisez la commande `lsusb` une fois votre appareil connecté afin de trouver les vendorId et productID)
 
 Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
 
@@ -227,6 +231,7 @@ On récupère le code pour la génération des containers dans docker
 Clonez le dépôt GitHub avec la commande suivante :
 
 ```sh
+sudo apt install git
 git clone https://github.com/cedbossneo/mowgli-docker
 cd mowgli-docker
 ```
@@ -272,7 +277,7 @@ Prenez une pause café, car cette étape peut être longue. Le téléchargement 
 sudo nano config/om/mower_config.sh
 ```
 
-Ajoutez la ligne suivante ou modifiez la si présente : `export OM_NO_COMMS="true"`. Ensuite, appuyez sur « Ctrl + o » pour enregistrer, validez avec la touche « Entrée », puis appuyez sur « Ctrl + x » pour quitter l’éditeur.
+Ajoutez la ligne suivante ou modifiez la si présente : `export OM_NO_COMMS=true`. Ensuite, appuyez sur « Ctrl + o » pour enregistrer, validez avec la touche « Entrée », puis appuyez sur « Ctrl + x » pour quitter l’éditeur.
 
 Enfin, redémarrez le Raspberry Pi :
 ```sh
@@ -314,8 +319,10 @@ Pour sortir des logs, faites Ctrl "c"
 
 ## Étape 9 : Compilation et injection du Firmware Mowgli dans la carte mère du robot.
 
-Cette étape est bien plus simple qu'il n'y paraît.
-Pour cela on utilise [**Visual studio code**](https://code.visualstudio.com)
+### 0. Sauvegarde du firmware initial
+Brancher le STLINK avec la GND sur GND, le 3.3V sur le 3.3V, le SWCLK sur le SWCL, le SWDIO sur le SWDA.
+La sauvegarde du firmware initial peut être faite avec le logiciel STM32CubeProgrammer (Connect -> ReadAll -> SaveAs)
+
 ### 1. Téléchargement du repo Github
 Normalement on utilise le même pour les 2 versions mais un problème (au 25-08-2024) sur le 500B oblige a en utiliser un différent.J'ai référencé ici les liens que j'ai utilisé et qui fonctionne.
 
@@ -338,7 +345,12 @@ https://github.com/Nekraus/Mowgli/tree/yardforce-500b
 
 ### 3. Injection du firmware
 
+Cette étape est bien plus simple qu'il n'y paraît.
+Pour cela on utilise [**Visual studio code**](https://code.visualstudio.com)
+
 Pour une raison quelquonque chez certains l'injection du firmware via vscode ne fonctionne pas, il est possible de l'injecter via le soft  [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA) : 
+
+Brancher le STLINK avec la GND sur GND, le 3.3V sur le 3.3V, le SWCLK sur le SWCL, le SWDIO sur le SWDA.
 
 > ***réaliser la Suite...***
 
@@ -353,7 +365,10 @@ Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfigu
 
 ### 1. Configuration du gps (RTK F9P ou similaire)
 
-Suivez ce [lien](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-gps/) pour configurer la carte GPS (en anglais)
+Suivez ce [lien](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-gps/) pour configurer la carte GPS (en anglais).
+
+# TODO
+Pour le UM982 suivre les [instructions](https://wiki.openmower.de/index.php?title=Unicore_GPS_modules)
 
 ### 2. Configuration du robot (Openmower App)
 
@@ -435,7 +450,7 @@ Dont voici la commande :
 ```sh
 sudo rm ./ros/map.bag
 ```
-Ensuite , il faudra recréer votre carte ou importé a nouveau celle que vous aviez sauvegardé en ayant préalablement enregistrer votre base AVANT (impératif).
+Ensuite , il faudra recréer votre carte ou importer à nouveau celle que vous aviez sauvegardé en ayant préalablement enregistrer votre base AVANT (impératif).
 
 # ** Bonus ** 
 
@@ -452,7 +467,7 @@ Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une deman
 
 ## ## Firmware personnalisés Mowgli compilé par mes propre soins.
 
-Les firmware disponible ici sont a utilisés a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
+Les firmware disponible ici sont à utiliser a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
 
 Attention : veuillez prendre soin de choisir le firmware qui correspond au modèle de votre carte mère.
 
@@ -461,7 +476,7 @@ Attention : veuillez prendre soin de choisir le firmware qui correspond au modè
 - ~~Firmware personnalisé Yardforce 500 [Firmware Y500-Mowgli](#)~~
 - ~~Firmware personnalisé Yardforce 500B [Firmware Y500-Mowgli](#)~~
 
-Pour injecté le firmware d'origine j'ai utilisé le soft [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA)
+Pour injecter le firmware d'origine j'ai utilisé le soft [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA)
 
   
 ## ## Support me / Soutenez moi
