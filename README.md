@@ -277,7 +277,18 @@ Prenez une pause café, car cette étape peut être longue. Le téléchargement 
 sudo nano config/om/mower_config.sh
 ```
 
-Ajoutez la ligne suivante ou modifiez la si présente : `export OM_NO_COMMS=true`. Ensuite, appuyez sur « Ctrl + o » pour enregistrer, validez avec la touche « Entrée », puis appuyez sur « Ctrl + x » pour quitter l’éditeur.
+Ajoutez la ligne suivante ou modifiez la si présente : 
+```sh
+export OM_NO_COMMS=true
+```
+
+Pour utiliser un UM-982, il est nécessaire de modifier le paramètre `OM_GPS_PROTOCOL` pour le mettre à la valeur `NMEA`:
+```sh
+# GPS protocol. Use UBX for u-blox chipsets and NMEA for everything else
+export OM_GPS_PROTOCOL=NMEA
+```
+
+Ensuite, appuyez sur « Ctrl + o » pour enregistrer, validez avec la touche « Entrée », puis appuyez sur « Ctrl + x » pour quitter l’éditeur.
 
 Enfin, redémarrez le Raspberry Pi :
 ```sh
