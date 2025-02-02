@@ -41,7 +41,7 @@ Ces liens vous fourniront des informations cruciales qui vous aideront à mieux 
 
 - Carte GPS/Rtk [F9P ardusimple sans entête](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers) avec son [cable d'antenne](https://fr.aliexpress.com/item/1005004690761874.html?spm=a2g0o.order_list.order_list_main.23.27185e5bO83Ive&gatewayAdapt=glo2fra) ou sa base [BT-M61AJ3](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) et son antenne [Bt560](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) mais ayant eu des difficulté de réception ( arbres et buissons divers) de mon coté j'ai utilisé la [Bt603](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) qui est plus puissante mais plus chère.
 
-- Putty ou similaire ( moi j'ai utilisé [mobaxterm]([https://www.solarwinds.com/free-tools/solar-putty](https://mobaxterm.mobatek.net/download-home-edition.html)) ), il y a aussi [Raspberry Pi Connect](https://connect.raspberrypi.com)
+- Putty ou similaire ( moi j'ai utilisé [mobaxterm]([[mobaxterm](https://mobaxterm.mobatek.net/download-home-edition.html)]), il y a aussi [Raspberry Pi Connect](https://connect.raspberrypi.com)
 
 - Connaissances de base en ligne de commande conseillé ( pas obligatoire car je détails tout ici )
 
