@@ -47,10 +47,10 @@ Ces liens vous fourniront des informations cruciales qui vous aideront à mieux 
 
 - Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début, mais attention l'IP qu'il faudra utiliser dans la suite du tuto est bien celle du wifi qui elle, est différente) 
 
-# Voici un apercu du cablage complet du robot Mowgli (schématisé)
+# Voici un apercu du cablage complet du robot Mowgli (schématisé modifié par mes soins)
 
 ![alt text](image.png)
-source : https://github.com/cedbossneo/mowgli-docker
+source d'origine : https://github.com/cedbossneo/mowgli-docker
 
 # Important ⚠️
 
