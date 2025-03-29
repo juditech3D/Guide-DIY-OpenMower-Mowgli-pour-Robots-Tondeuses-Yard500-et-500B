@@ -34,9 +34,13 @@ jobs:
         run: ls -la _site
 
       - name: Upload site artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ github.workspace }}/_site
+        name: github-pages
+        path: _site
+      - name: List build files
+        run: ls -la _site
+
 
   deploy:
     needs: build
