@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04  # ✅ Pas ubuntu-24.04 qui est incompatible
+    runs-on: ubuntu-22.04  # ✅ ubuntu-24.04 est incompatible
 
     steps:
       - name: Checkout code
@@ -36,11 +36,7 @@ jobs:
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-        name: github-pages
-        path: _site
-      - name: List build files
-        run: ls -la _site
-
+          path: _site  # ✅ Corrigé
 
   deploy:
     needs: build
@@ -54,4 +50,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
