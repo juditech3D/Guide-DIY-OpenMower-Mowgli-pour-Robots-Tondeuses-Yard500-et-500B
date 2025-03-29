@@ -24,8 +24,11 @@ jobs:
           ruby-version: 3.1
           bundler-cache: true
 
+      - name: Update Bundler
+        run: gem install bundler
+
       - name: Install dependencies
-        run: bundle install
+        run: bundle install --jobs 4 --retry 3
 
       - name: Build site with Jekyll
         run: bundle exec jekyll build
@@ -36,7 +39,7 @@ jobs:
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site  # ✅ Corrigé
+          path: _site
 
   deploy:
     needs: build
