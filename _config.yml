@@ -1,8 +1,9 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+title: Guide OpenMower Mowgli
+description: Guide complet pour configurer OpenMower avec Mowgli et Yardforce 500B
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+url: "https://juditech3d.github.io"
+baseurl: "/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B"
 
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  Template Repository: https://github.com/juditech3D/Guide-DIY-OpenMower
