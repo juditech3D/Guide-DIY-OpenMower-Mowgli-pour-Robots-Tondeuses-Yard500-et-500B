@@ -30,7 +30,7 @@
         - name: Check built files
           run: ls -la _site
         - name: Upload site artifact
-          uses: actions/upload-pages-artifact@v2
+          uses: actions/upload-pages-artifact@v3
           with:
             path: _site
     deploy:
@@ -43,4 +43,3 @@
         - name: Deploy to GitHub Pages
           id: deployment
           uses: actions/deploy-pages@v2
-  
