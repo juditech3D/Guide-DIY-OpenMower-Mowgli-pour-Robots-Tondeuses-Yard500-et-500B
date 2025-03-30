@@ -32,7 +32,6 @@
           run: bundle install
         - name: Build site with Jekyll
           run: bundle exec jekyll build
-        - name: Check built files
         - name: Validate built site
           run: |
             if [ ! -f "_site/index.html" ]; then
