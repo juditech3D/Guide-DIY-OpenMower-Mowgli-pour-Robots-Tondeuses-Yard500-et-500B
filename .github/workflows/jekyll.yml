@@ -33,6 +33,12 @@
         - name: Build site with Jekyll
           run: bundle exec jekyll build
         - name: Check built files
+        - name: Validate built site
+          run: |
+            if [ ! -f "_site/index.html" ]; then
+              echo "Error: index.html not found in _site directory."
+              exit 1
+            fi
           run: ls -la _site
         - name: Upload site artifact
           uses: actions/upload-pages-artifact@v3
