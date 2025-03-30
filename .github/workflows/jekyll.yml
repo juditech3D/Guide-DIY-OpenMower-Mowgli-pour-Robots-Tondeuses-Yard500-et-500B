@@ -24,7 +24,7 @@
         - name: Setup Ruby
           uses: ruby/setup-ruby@v1
           with:
-            ruby-version: "3.2.x"
+            ruby-version: "3.2.8"
             bundler-cache: true
         - name: Force Ruby platform
           run: bundle config set force_ruby_platform true
