@@ -38,7 +38,7 @@
               echo "Error: index.html not found in _site directory."
               exit 1
             fi
-          run: ls -la _site
+            ls -la _site
         - name: Upload site artifact
           uses: actions/upload-pages-artifact@v3
           with:
