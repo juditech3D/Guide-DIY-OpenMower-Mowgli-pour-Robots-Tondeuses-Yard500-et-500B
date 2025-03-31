@@ -1,3 +1,12 @@
+---
+title: Guide DIY OpenMower Mowgli
+layout: default
+nav_order: 1
+has_children: false
+permalink: /
+toc: true
+---
+
 # Guide OpenMower Mowgli DIY Robot Tondeuse Yardforce 500 et 500B
 
 Bienvenue dans ce guide détaillé en français pour la configuration et le déploiement de votre robot tondeuse OpenMower Mowgli Yardforce 500 et 500B. Ce tutoriel s'appuie sur mon expérience personnelle avec la construction du modèle Yardforce 500B.
