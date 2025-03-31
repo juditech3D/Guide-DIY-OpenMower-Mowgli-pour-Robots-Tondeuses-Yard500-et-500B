@@ -1,9 +1,6 @@
 title: Guide OpenMower Mowgli
 description: Guide complet pour configurer OpenMower avec Mowgli et Yardforce 500B
 theme: just-the-docs
-  show_toc: true
-  toc_levels: 1..3
-
 
 url: "https://juditech3d.github.io"
 baseurl: "/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B"
@@ -12,3 +9,8 @@ aux_links:
   Template Repository: https://github.com/juditech3D/Guide-DIY-OpenMower
 
 favicon_ico: "/favicon.ico"
+
+just_the_docs:
+  show_toc: true
+  toc_levels: 1..3
+  toc_sticky: true
