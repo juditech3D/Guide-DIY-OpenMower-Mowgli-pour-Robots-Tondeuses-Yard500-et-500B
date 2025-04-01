@@ -4,13 +4,22 @@ title: "Guide OpenMower Mowgli"
 nav_order: 1
 ---
 
+---
+title: Guide DIY OpenMower Mowgli
+layout: default
+nav_order: 1
+has_children: false
+permalink: /
+toc: true
+---
+
 # Guide OpenMower Mowgli DIY Robot Tondeuse Yardforce 500 et 500B
 
 Bienvenue dans ce guide détaillé en français pour la configuration et le déploiement de votre robot tondeuse OpenMower Mowgli Yardforce 500 et 500B. Ce tutoriel s'appuie sur mon expérience personnelle avec la construction du modèle Yardforce 500B.
 
 **Ce guide est spécifiquement conçu pour les modèles Yardforce 500 et 500B équipés de leur carte mère d'origine (STM32 F103 et F402). Il peut éventuellement être applicable à d'autres modèles utilisant les mêmes cartes mères.**
 
-## **⚠️ Avertissement : Dans le cadre de ce tutoriel, le clavier et les voyants situés sur le capot du Yardforce ne seront pas pleinement fonctionnels. Cela pourrait être problématique pour certains utilisateurs qui comptent sur ces fonctionnalités.** ##
+## *⚠️ Avertissement : Dans le cadre de ce tutoriel, le clavier et les voyants situés sur le capot du Yardforce ne seront pas pleinement fonctionnels. Cela pourrait être problématique pour certains utilisateurs qui comptent sur ces fonctionnalités.⚠️* ##
 
 
 **Pour le modèle Yardforce 500, certains voyants fonctionnent malgré tout sans modification du firmware du tableau de bord, notamment :**
@@ -21,9 +30,11 @@ Bienvenue dans ce guide détaillé en français pour la configuration et le dép
 
 Ces fonctionnalités sont opérationnelles sans qu'il soit nécessaire de changer le firmware du tableau de bord.
 
-## **⚠️ En revanche, pour le modèle Yardforce 500B, le clavier et les voyants sur le capot ne seront pas fonctionnels avec ce tutoriel, en tout cas pour l'instant.** ##
+## **⚠️ En revanche, pour le modèle Yardforce 500B, le clavier et les voyants sur le capot ne seront pas fonctionnels avec ce tutoriel. ⚠️** ##
 
-# Important ⚠️
+## *⚠️Avertissement de non-responsabilité : Toute modification du firmware ou de la carte électronique peut entraîner des conséquences imprévues sur le fonctionnement de votre appareil, y compris des dommages potentiels. En suivant ce tutoriel, vous acceptez de procéder à vos propres risques. Les modifications électroniques sur la carte, en particulier, peuvent affecter le matériel de manière irréversible. De plus, ces modifications annuleront la garantie de votre appareil .Je décline toute responsabilité en cas de dysfonctionnement, dommage ou problème qui pourrait résulter de l'application de ces modifications.⚠️*
+
+#  ⚠️ Important ⚠️
 
 ⚠️**Attention :** Ce guide est en cours de rédaction et évolue au fil du temps. Il est donc possible que certaines informations ne soient pas complètement à jour.⚠️
 
@@ -37,22 +48,24 @@ Pour bien comprendre et réussir à suivre ce guide, il est important de visiter
 
 Ces liens vous fourniront des informations cruciales qui vous aideront à mieux comprendre les étapes et les concepts abordés dans ce guide.
 
-## Prérequis pour utilisé ce guide (et matériels que j'ai utilisés)
+## Prérequis pour utiliser ce guide (et matériels que j'ai utilisés)
 
-- Raspberry Pi avec Pi OS installé ( cela suppose que vous avez déja créer votre sd ou ssd (pour le pi 4) et qu'il démarre sans problème sur le pi)
+- Module d'alimentation DC/DC [LM2596S](https://amzn.eu/d/jhNev6j)
+
+- Raspberry Pi 4 conseillé https://raspberrytips.fr/amz/pi4( fonctionne normalement avec aussi un Pi 3 ou 5 )
 
 - Carte GPS/Rtk [F9P ardusimple sans entête](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers) avec son [cable d'antenne](https://fr.aliexpress.com/item/1005004690761874.html?spm=a2g0o.order_list.order_list_main.23.27185e5bO83Ive&gatewayAdapt=glo2fra) ou sa base [BT-M61AJ3](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) et son antenne [Bt560](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) mais ayant eu des difficulté de réception ( arbres et buissons divers) de mon coté j'ai utilisé la [Bt603](https://fr.aliexpress.com/item/32991527632.html?spm=a2g0o.order_list.order_list_main.28.755e5e5bZP1cya&gatewayAdapt=glo2fra) qui est plus puissante mais plus chère.
 
-- Putty ou similaire ( moi j'ai utilisé [solarputty](https://www.solarwinds.com/free-tools/solar-putty) ), il y a aussi [Raspberry Pi Connect](https://connect.raspberrypi.com)
+- Putty ou similaire ( moi j'ai utilisé [mobaxterm]([[mobaxterm](https://mobaxterm.mobatek.net/download-home-edition.html)]), il y a aussi [Raspberry Pi Connect](https://connect.raspberrypi.com)
 
 - Connaissances de base en ligne de commande conseillé ( pas obligatoire car je détails tout ici )
 
 - Accès Internet (Pour une configuration plus rapide, vous pouvez le raccorder en Rj45 au début, mais attention l'IP qu'il faudra utiliser dans la suite du tuto est bien celle du wifi qui elle, est différente) 
 
-# Voici un apercu du cablage complet du robot Mowgli (schématisé)
+# Voici un apercu du cablage complet du robot Mowgli (schématisé modifié par mes soins)
 
 ![alt text](image.png)
-source : https://github.com/cedbossneo/mowgli-docker
+source d'origine : https://github.com/cedbossneo/mowgli-docker
 
 # Important ⚠️
 
@@ -64,9 +77,16 @@ source : https://github.com/cedbossneo/mowgli-docker
 
 ### Étapes pour configurer un ou plusieurs réseaux Wi-Fi sur un Raspberry Pi 4
 
-#### 1. Préparation de la carte SD
+Pour le wifi et le SSH, 2 solutions : 
+- Soit preconfigurer avec Pi Imager comme dans la vidéo ci-dessus
+- soit le faire manuellement comme ci-dessous
 
-1. **Gravez l'image de Raspberry Pi OS** sur la carte SD en utilisant un outil comme Raspberry Pi Imager ou Balena Etcher.
+#### 1. Préparation de la carte SD
+<details>
+
+  <summary> Dépliez pour voir </summary>
+
+1. **Gravez l'image de Raspberry Pi OS (64 bits)** sur la carte SD en utilisant un outil comme Raspberry Pi Imager ou Balena Etcher.
 2. **Insérez la carte SD** dans votre ordinateur après avoir gravé l'image.
 
 #### 2. Accédez à la partition `boot`
@@ -141,7 +161,13 @@ source : https://github.com/cedbossneo/mowgli-docker
 
    Dans cet exemple, `Premier_SSID` sera préféré à `Deuxieme_SSID` si les deux sont disponibles.
 
-#### 4. Activez SSH ( ⚠️ OBLIGATOIRE pour la suite du tutoriel )
+</details>
+
+
+#### 4. Activez SSH ( ⚠️ OBLIGATOIRE pour la suite du tutoriel ) Utile si vous ne l'avez pas activé dans Pi imager.
+
+<details>
+  <summary> Dépliez pour voir </summary>
 
 1. **Pour activer SSH dès le premier démarrage**, créez un fichier vide nommé `ssh` (sans extension) dans la partition `boot`. Cela activera le service SSH automatiquement.
 
@@ -149,6 +175,8 @@ source : https://github.com/cedbossneo/mowgli-docker
 
 1. **Sauvegardez le fichier `wpa_supplicant.conf`** et fermez l'éditeur de texte.
 2. **Éjectez la carte SD** de votre ordinateur en toute sécurité.
+
+</details>
 
 #### 6. Démarrez le Raspberry Pi 4
 
@@ -159,9 +187,9 @@ source : https://github.com/cedbossneo/mowgli-docker
 
 Cette méthode vous permet de configurer un ou plusieurs réseaux Wi-Fi de manière flexible pour votre Raspberry Pi 4, avec la possibilité d'établir des priorités entre les réseaux si nécessaire.
 
-# Important ⚠️
+# ⚠️ Important ⚠️
 
-⚠️ N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry pi via votre box pour qu'il soit toujours accessible.⚠️
+## **⚠️ N'oubliez pas de fixer l'adresse IP ou l'adresse mac de votre rasberry pi via votre box pour qu'il soit toujours accessible.⚠️**
 
 # Préparation du raspberry pi et configuration
 
@@ -181,15 +209,7 @@ Installez Docker en exécutant la commande suivante :
 curl https://get.docker.com | sh
 ```
 
-## Étape 3 : Installation de Docker Compose
-
-Installez Docker Compose avec la commande suivante :
-
-```sh
-sudo apt install docker-compose -y
-```
-
-## Étape 4 : Configuration de udev
+## Étape 3 : Configuration de udev
 
 1. Créez et éditez le fichier de règles udev :
 
@@ -205,7 +225,11 @@ SUBSYSTEM=="tty" ATTRS{product}=="Mowgli", SYMLINK+="mowgli"
 SUBSYSTEM=="tty" ATTRS{idVendor}=="1546" ATTRS{idProduct}=="01a9", SYMLINK+="gps"
 # ESP USB CDC - RTK1010Board
 SUBSYSTEM=="tty" ATTRS{idVendor}=="303a" ATTRS{idProduct}=="4001", SYMLINK+="gps"
+# UM982 - WittMotion WTRTK-982
+SUBSYSTEM=="tty" ATTRS{idVendor}=="1a86" ATTRS{idProduct}=="7523", SYMLINK+="gps"
 ```
+
+(si GPS spécifique, utilisez la commande `lsusb` une fois votre appareil connecté afin de trouver les vendorId et productID)
 
 Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
 
@@ -216,17 +240,18 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-## Étape 5 : Clonage du dépôt
+## Étape 4 : Clonage du dépôt
 
 On récupère le code pour la génération des containers dans docker
 Clonez le dépôt GitHub avec la commande suivante :
 
 ```sh
+sudo apt install git
 git clone https://github.com/cedbossneo/mowgli-docker
 cd mowgli-docker
 ```
 
-## Étape 6 : Configuration de l'environnement
+## Étape 5 : Configuration de l'environnement
 
 1. Créez et éditez le fichier `.env` (il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker") :
 
@@ -240,221 +265,90 @@ sudo nano .env
 # ROS_IP est l'IP de la machine exécutant le conteneur Docker
 # MOWER_IP est l'IP de la tondeuse
 # Lorsque vous n'êtes pas en mode ser2net, les deux IPs doivent être les mêmes
-ROS_IP=192.168.1.34
-MOWER_IP=192.168.1.34
+ROS_IP=192.168.X.XX
+MOWER_IP=192.168.X.XX
 IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
 ```
 
 Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
 
-## Étape 7 : Mise à jour de docker-compose.yaml ( mettre à jour suite a une erreur comme quoi le fichier était obsolète donc obligatoire si vous avez une erreur à l'étapes 8 sinon vous ne pourrez pas démarrer les dockers)
-
-![Erreur docker-compose.yaml](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Solarputty/Erreur%20docker-compose.yaml.png)
 
 
-Ouvrez le fichier `docker-compose.yaml` :
+## Étape 6 : Lancement des Conteneurs
 
-```sh
-sudo nano docker-compose.yaml
-```
-
-Remplacez le contenu par le suivant ou modifier simplement les lignes indiquer ci-dessous par cette fleche <============= (pour info le pavé numerique ne fonctionne pas , déplacer le curseur avec les fleche de navigation):
-
-```yaml
-version: '3'
-
-services:
-  watchtower:
-    image: containrrr/watchtower
-    restart: unless-stopped
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      WATCHTOWER_CLEANUP: 'true'
-      WATCHTOWER_POLL_INTERVAL: 14400
-      WATCHTOWER_DEBUG: 'false'
-      WATCHTOWER_LABEL_ENABLE: 'true'
-  gui:
-    container_name: openmower-gui
-    labels:
-      "com.centurylinklabs.watchtower.enable": true
-      project: openmower
-      app: gui
-    image: ghcr.io/cedbossneo/openmower-gui:master
-    restart: unless-stopped
-    network_mode: host
-    privileged: true
-    environment:
-      ROS_IP: ${ROS_IP}
-      ROS_MASTER_URI: http://${ROS_IP}:11311
-      MOWER_CONFIG_FILE: /config/mower_config.sh
-      DOCKER_HOST: unix:///var/run/docker.sock
-      DB_PATH: /db
-    depends_on:
-      - roscore
-    volumes:
-      - /dev:/dev
-      - ./config/db:/db
-      - ./config/om:/config
-      - /var/run/docker.sock:/var/run/docker.sock
-  web:
-    container_name: mowgli-web
-    labels:
-      project: openmower
-      app: web
-    image: nginx
-    ports:
-      - 4005:80
-    volumes:
-      - ./web:/usr/share/nginx/html:ro
-    restart: unless-stopped
-
-  mosquitto:
-    container_name: mowgli-mqtt
-    labels:
-      project: openmower
-      app: mqtt
-    hostname: mosquitto
-    image: eclipse-mosquitto:latest
-    ports:
-      - 1883:1883
-      - 9001:9001
-    volumes:
-      - ./config/mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
-    restart: unless-stopped
-
-  roscore:
-    container_name: mowgli-roscore
-    labels:
-      project: openmower
-      app: roscore
-    image: ${IMAGE}
-    network_mode: host
-    tty: true
-    privileged: true
-    command:
-      - /opt/ros/noetic/bin/roscore
-    environment:
-      ROS_IP: ${ROS_IP}
-      ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
-      ROSOUT_DISABLE_FILE_LOGGING: "true" # ou modifier cette ligne : true en "true" <==================
-    tmpfs: /root/.ros/log/
-    volumes:
-      - ./config/om:/config
-      - ./ros:/root/.ros/
-      - /etc/timezone:/etc/timezone:ro
-    restart: unless-stopped
-
-  rosserial:
-    container_name: mowgli-rosserial
-    labels:
-      project: openmower
-      app: rosserial
-    image: ${IMAGE}
-    network_mode: host
-    tty: true
-    privileged: true
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: 10m
-    environment:
-      ROS_MASTER_URI: http://${ROS_IP}:11311
-      ROS_IP: ${ROS_IP}
-      ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
-      ROSOUT_DISABLE_FILE_LOGGING: "true" # ou modifier cette ligne : true en "true" <==================
-    command:
-      - /opt/ros/noetic/bin/rosrun
-      - rosserial_server
-      - serial_node
-      - _port:=/dev/mowgli
-      - _baud:=115200
-    tmpfs: /root/.ros/log/
-    volumes:
-      - ./ros:/root/.ros/
-      - ./config/om:/config
-      - /etc/timezone:/etc/timezone:ro
-      - /dev:/dev
-    depends_on:
-      - roscore
-    restart: unless-stopped
-
-  openmower:
-    container_name: mowgli-openmower
-    labels:
-      project: openmower
-      app: openmower
-    image: ${IMAGE}
-    network_mode: host
-    tty: true
-    privileged: true
-    logging:
-      driver: "json-file"
-      options:
-        max-file: "5"
-        max-size: 10m
-    environment:
-      ROS_MASTER_URI: http://${ROS_IP}:11311
-      ROS_IP: ${ROS_IP}
-      ROSCONSOLE_CONFIG_FILE: /config/rosconsole.config
-      ROSOUT_DISABLE_FILE_LOGGING: "true" # ou modifier cette ligne : true en "true" <==================
-    tmpfs: /root/.ros/log/
-    volumes:
-      - ./config/om:/config
-      - ./mower_params:/root/mower_params:ro
-      - ./params:/opt/open_mower_ros/src/open_mower/params:ro
-      - ./ros:/root/.ros/
-      - /etc/timezone:/etc/timezone:ro
-      - /dev:/dev
-    depends_on:
-      - rosserial
-    restart: unless-stopped
-```
-
-Faites Ctrl "o" pour enregistrer et valider avec la touche "Entrée", puis Ctrl "x" pour sortir.
-
-## Étape 8 : Démarrage des Conteneurs
-
-Démarrez les conteneurs Docker (il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker") :
+1. Lancez les conteneurs Docker (assurez-vous d’être dans le répertoire « mowgli-docker ». Si ce n’est pas le cas, exécutez la commande « cd mowgli-docker ») :
 
 ```sh
-sudo docker-compose up -d
+sudo docker compose up -d
 ```
-Allez vous faire un café car cette partie peut etre longue, ça télécharge tout les fichier des conteneurs et donc dépend de la vitesse de votre connexion internet.
 
-## Étape 9 : Comment arrêtez et mettre a jour les Conteneurs si besoin
+Prenez une pause café, car cette étape peut être longue. Le téléchargement des fichiers des conteneurs dépend de la vitesse de votre connexion Internet.
+
+2. # ⚠️ Important ⚠️
+
+⚠️ Attention : Depuis le 12/10/2024, il est nécessaire de mettre à jour un fichier de configuration pour assurer le bon fonctionnement de votre robot. Sans cela, le robot risque de ne pas fonctionner correctement. Pour ce faire, éditez le fichier `mower_config.sh` (assurez-vous d’être dans le répertoire « mowgli-docker ». Si ce n’est pas le cas, exécutez « cd mowgli-docker ») :
+
+```sh
+sudo nano config/om/mower_config.sh
+```
+
+Ajoutez la ligne suivante ou modifiez la si présente : 
+```sh
+export OM_NO_COMMS=true
+```
+
+Pour utiliser un UM-982, il est nécessaire de modifier le paramètre `OM_GPS_PROTOCOL` pour le mettre à la valeur `NMEA`:
+```sh
+# GPS protocol. Use UBX for u-blox chipsets and NMEA for everything else
+export OM_GPS_PROTOCOL=NMEA
+```
+
+Ensuite, appuyez sur « Ctrl + o » pour enregistrer, validez avec la touche « Entrée », puis appuyez sur « Ctrl + x » pour quitter l’éditeur.
+
+Enfin, redémarrez le Raspberry Pi :
+```sh
+sudo reboot
+```
+
+
+## Étape 7 : Comment arrêtez et mettre a jour les Conteneurs si besoin
 
 Arrêter les conteneurs Docker :
 
 ```sh
-sudo docker-compose down
+sudo docker compose down
 ```
-
+<details>
+  <summary>Mettre à jour les conteneurs Docker ( Attention à utiliser que si vous savez ce que vous faites : peut faire planter openmower ) :</summary>
 Mettre à jour les conteneurs Docker :
 
 Faites un pull (pas besoin d'arreter les conteneurs)
 ```sh
-sudo docker-compose pull
+sudo docker compose pull
 ```
 Puis ensuite relancer les conteneurs
 ```sh
-sudo docker-compose up -d
+sudo docker compose up -d
 ```
+</details>
 
-## Étape 10 : Surveillance des Logs
+## Étape 8 : Surveillance des Logs (optionnel)
+<details>
+  <summary>Surveillez les logs pour vérifier que tout fonctionne correctement : utile pour débugage</summary>
 
-Surveillez les logs pour vérifier que tout fonctionne correctement :
 
 ```sh
-sudo docker-compose logs -f
+sudo docker compose logs -f
 ```
 Pour sortir des logs, faites Ctrl "c"
+</details>
 
-## Étape 11 : Compilation et injection du Firmware Mowgli dans la carte mère du robot.
+## Étape 9 : Compilation et injection du Firmware Mowgli dans la carte mère du robot.
 
-Cette étape est bien plus simple qu'il n'y paraît.
-Pour cela on utilise [**Visual studio code**](https://code.visualstudio.com)
+### 0. Sauvegarde du firmware initial
+Brancher le STLINK avec la GND sur GND, le 3.3V sur le 3.3V, le SWCLK sur le SWCL, le SWDIO sur le SWDA.
+La sauvegarde du firmware initial peut être faite avec le logiciel STM32CubeProgrammer (Connect -> ReadAll -> SaveAs)
+
 ### 1. Téléchargement du repo Github
 Normalement on utilise le même pour les 2 versions mais un problème (au 25-08-2024) sur le 500B oblige a en utiliser un différent.J'ai référencé ici les liens que j'ai utilisé et qui fonctionne.
 
@@ -465,9 +359,9 @@ https://github.com/cedbossneo/Mowgli/tree/main
 > ***réaliser la Suite...***
 
 Pour le 500B : 
-https://github.com/jeremysalwen/Mowgli/tree/yardforce-500b
+https://github.com/Nekraus/Mowgli/tree/yardforce-500b
 
-**Lien direct : https://github.com/jeremysalwen/Mowgli/archive/refs/heads/yardforce-500b.zip
+**Lien direct : https://github.com/Nekraus/Mowgli/archive/refs/heads/yardforce-500b.zip
 
 > ***réaliser la Suite...***
 
@@ -477,13 +371,18 @@ https://github.com/jeremysalwen/Mowgli/tree/yardforce-500b
 
 ### 3. Injection du firmware
 
+Cette étape est bien plus simple qu'il n'y paraît.
+Pour cela on utilise [**Visual studio code**](https://code.visualstudio.com)
+
 Pour une raison quelquonque chez certains l'injection du firmware via vscode ne fonctionne pas, il est possible de l'injecter via le soft  [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA) : 
+
+Brancher le STLINK avec la GND sur GND, le 3.3V sur le 3.3V, le SWCLK sur le SWCL, le SWDIO sur le SWDA.
 
 > ***réaliser la Suite...***
 
-## Étape 12 : Configuration de démarrage du robot
+## Étape 10 : Configuration de démarrage du robot
 
-Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration su GPS, de l'application et la créations des cartes de tontes !
+Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfiguré et prêt à être utilisé, enfin presque car il reste la configuration du GPS, de l'application et la créations des cartes de tontes !
 
 # Important ⚠️
 
@@ -492,7 +391,10 @@ Félicitations, votre robot tondeuse OpenMower Mowgli est maintenant préconfigu
 
 ### 1. Configuration du gps (RTK F9P ou similaire)
 
-Suivez ce [lien](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-gps/) pour configurer la carte GPS (en anglais)
+Suivez ce [lien](https://openmower.de/docs/robot-assembly/prepare-the-parts/prepare-the-gps/) pour configurer la carte GPS (en anglais).
+
+# TODO
+Pour le UM982 suivre les [instructions](https://wiki.openmower.de/index.php?title=Unicore_GPS_modules)
 
 ### 2. Configuration du robot (Openmower App)
 
@@ -560,8 +462,21 @@ Tableau de bord détaillé avec paramètre :
 
 > ***réaliser la Suite...***
 
-### ## **# Attention : si vous modifier votre map après la première tonte, il faudra redémarrer les dockers pour qu'elle soit pris en compte**
+## **⚠️ Attention : si vous modifier votre map après la première tonte, il faudra redémarrer les dockers pour qu'elle soit pris en compte**⚠️
 
+## ⚠️ Attention : je vous conseil de  sauvegarder votre map régulièrement a chaque changement important au cas ou ⚠️
+
+
+
+# ** FAQ et Problèmes divers ** 
+
+### 1- Un bug au niveau de la fusion des cartes de tontes (https://github.com/cedbossneo/openmower-gui/issues/51) fait planter openmower : pour résoudre le problème le seul moyen est de supprimer le fichier "map.bag" ( il faut etre dans le répertoire mowgli-docker, si vous n'y etes pas faites "cd mowgli-docker" ) :
+
+Dont voici la commande : 
+```sh
+sudo rm ./ros/map.bag
+```
+Ensuite , il faudra recréer votre carte ou importer à nouveau celle que vous aviez sauvegardé en ayant préalablement enregistrer votre base AVANT (impératif).
 
 # ** Bonus ** 
 
@@ -570,22 +485,24 @@ Liste des modélisations 3D que j'ai réaliser pour mon robot (je vous conseil d
 
 - Support Raspberry [Pi4](https://makerworld.com/en/@juditech3d)
 - Support [F9P](https://makerworld.com/en/@juditech3d)
+- Roue lestable + pneu [Yardforce 500/500B](https://makerworld.com/en/@juditech3d)
+- Gyrophare multifonction [Yardforce 500/500B](https://makerworld.com/en/@juditech3d)
 
-Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une demande [ICI](https://t.me/+mOlwROGsP3AyYTlk)
+Si vous n'avez pas d'imprimante 3D, je peux vous les imprimer : Faites une demande [ICI](https://t.me/+mOlwROGsP3AyYTlk) ou [Par mail](juditech3d@gmail.com)
 
 
 ## ## Firmware personnalisés Mowgli compilé par mes propre soins.
 
-Les firmware disponible ici sont a utilisés a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
+Les firmware disponible ici sont à utiliser a vos propre risques, mais ils ont été tous testé avec succès a la date indiqué.
 
 Attention : veuillez prendre soin de choisir le firmware qui correspond au modèle de votre carte mère.
 
-- Firmware d'origine Yardforce 500 [Firmware Y500-Origine](#)
+- ~~Firmware d'origine Yardforce 500 [Firmware Y500-Origine](#)~~
 - Firmware d'origine Yardforce 500B [Firmware Y500B-Origine](https://mega.nz/file/LctRlDjA#o_DlA1pqDVFBnv7Dm9BDvJAm1jmBUdYOCP_2UW77QMc) mise à jour le 23/08/2024
-- Firmware personnalisé Yardforce 500 [Firmware Y500-Mowgli](#)
-- Firmware personnalisé Yardforce 500B [Firmware Y500-Mowgli](#)
+- ~~Firmware personnalisé Yardforce 500 [Firmware Y500-Mowgli](#)~~
+- ~~Firmware personnalisé Yardforce 500B [Firmware Y500-Mowgli](#)~~
 
-Pour injecté le firmware d'origine j'ai utilisé le soft [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA)
+Pour injecter le firmware d'origine j'ai utilisé le soft [**STM32 Cube Programmer**](https://mega.nz/file/vdtVUZRB#A5RcIabdxEIuN2u6PzWVmGQnhNl94SxUVcujhE44MvA)
 
   
 ## ## Support me / Soutenez moi
