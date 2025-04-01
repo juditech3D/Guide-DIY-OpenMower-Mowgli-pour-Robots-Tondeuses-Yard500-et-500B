@@ -72,7 +72,7 @@ GEM
     rexml (3.4.1)
     rouge (4.5.1)
     safe_yaml (1.0.5)
-    sass-embedded (1.86.0-x64-mingw-ucrt)
+    sass-embedded (1.86.1-x64-mingw-ucrt)
       google-protobuf (~> 4.30)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
