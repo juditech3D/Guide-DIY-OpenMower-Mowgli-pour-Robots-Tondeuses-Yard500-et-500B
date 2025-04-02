@@ -1,58 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@500;700&display=swap');
 
+/* === Base mode sombre === */
 :root {
-    --color-scheme: dark;
+  --color-scheme: dark;
+
+  --color-background: #121212;
+  --color-background-muted: #1e1e1e;
+  --color-foreground: #e0e0e0;
+  --color-text: #ffffff;
+
+  --color-link: #4fc3f7;
+  --color-link-visited: #ce93d8;
+  --color-link-hover: #81d4fa;
+
+  --color-border: #333;
+  --color-accent: #90caf9;
+
+  --color-success: #66bb6a;
+  --color-danger: #ef5350;
 }
 
-
-/* Bouton toggle minimal */
-#dark-mode-toggle {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    z-index: 1000;
+/* Forcer le mode sombre partout */
+body {
+  background-color: var(--color-background) !important;
+  color: var(--color-text) !important;
+  font-family: 'Inter', sans-serif;
 }
 
-#dark-mode-toggle:hover {
-    background-color: var(--color-background-muted);
+/* Titres avec glow léger */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  text-shadow: 0 0 3px rgba(100, 224, 255, 0.7), 0 0 10px rgba(0, 225, 255, 0.5);
 }
-/* Forcer le mode sombre */
-:root {
-    color-scheme: dark;
-  }
-  
-  body {
-    background-color: #121212 !important;
-    color: #e0e0e0 !important;
-  }
-  :root {
-    --color-background: #121212;
-    --color-background-muted: #1e1e1e;
-    --color-foreground: #e0e0e0;
-    --color-text: #ffffff;
-    --color-link: #4fc3f7;
-    --color-link-visited: #ce93d8;
-    --color-link-hover: #81d4fa;
-    --color-border: #333;
-    --color-accent: #90caf9;
-    --color-success: #66bb6a;
-    --color-danger: #ef5350;
-  }
- /* === Encadrés stylisés === */
 
+/* === Encadrés stylisés === */
 .alert-red,
 .alert-orange,
-.alert-green {
+.alert-green,
+.alert-blue {
   padding: 1rem;
   margin: 1.5rem 0;
   border-left: 6px solid;
-  border-radius: 4px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 /* Titres d'encadré */
@@ -62,184 +55,51 @@
   margin-bottom: 0.5rem;
 }
 
-/* ROUGE - Avertissements */
+/* Encadré rouge - Avertissements */
 .alert-red {
-  background-color: #ffebee;
-  border-left-color: #c62828;
+  background-color: #3b0000;
+  border-left-color: #ff1744;
+  color: #ffcdd2;
+  box-shadow: 0 0 12px rgba(255, 23, 68, 0.5);
 }
-
 .alert-red .alert-title {
-  color: #c62828;
+  color: #ff8a80;
 }
 
-/* ORANGE - Ressources */
+/* Encadré orange - Ressources utiles */
 .alert-orange {
-  background-color: #fff3e0;
-  border-left-color: #ef6c00;
+  background-color: #402500;
+  border-left-color: #ff9100;
+  color: #fff0cc;
+  box-shadow: 0 0 12px rgba(255, 145, 0, 0.5);
 }
-
 .alert-orange .alert-title {
-  color: #ef6c00;
+  color: #ffcc80;
 }
 
-/* VERT - Astuces */
+/* Encadré vert - Astuces */
 .alert-green {
-  background-color: #e8f5e9;
-  border-left-color: #2e7d32;
+  background-color: #002d00;
+  border-left-color: #00e676;
+  color: #c8fdd7;
+  box-shadow: 0 0 12px rgba(0, 230, 118, 0.5);
 }
-
 .alert-green .alert-title {
-  color: #2e7d32;
+  color: #a5d6a7;
 }
 
-/* Mode sombre */
-@media (prefers-color-scheme: dark) {
-  .alert-red {
-    background-color: #2b1a1a;
-    color: #ffcdd2;
-    border-left-color: #ef5350;
-  }
-
-  .alert-red .alert-title {
-    color: #ff8a80;
-  }
-
-  .alert-orange {
-    background-color: #3b2a1a;
-    color: #ffe0b2;
-    border-left-color: #ffa726;
-  }
-
-  .alert-orange .alert-title {
-    color: #ffcc80;
-  }
-
-  .alert-green {
-    background-color: #1b2e1b;
-    color: #c9f5cc;
-    border-left-color: #66bb6a;
-  }
-
-  .alert-green .alert-title {
-    color: #a5d6a7;
-  }
-}
-/* BLEU - Informations */
+/* Encadré bleu - Infos complémentaires */
 .alert-blue {
-  background-color: #e3f2fd;
-  border-left: 6px solid #1976d2;
-  padding: 1rem;
-  margin: 1.5rem 0;
-  border-radius: 4px;
+  background-color: #00233b;
+  border-left-color: #42a5f5;
+  color: #e0f7ff;
+  box-shadow: 0 0 12px rgba(66, 165, 245, 0.5);
 }
-
 .alert-blue .alert-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: #1976d2;
+  color: #90caf9;
 }
 
-/* Mode sombre */
-@media (prefers-color-scheme: dark) {
-  .alert-blue {
-    background-color: #1a2633;
-    color: #bbdefb;
-    border-left-color: #64b5f6;
-  }
-
-  .alert-blue .alert-title {
-    color: #90caf9;
-  }
-}
-
-/* Unifier le fond entre le contenu principal et la sidebar */
-body,
-.main-content,
-.side-bar,
-.site-nav,
-.site-header,
-.site-footer {
-  background-color: #121212 !important;
-}
-.main-content,
-.side-bar,
-.site-nav,
-.site-header {
-  color: #e0e0e0 !important;
-}
-/* Ajout d'une bordure droite sur la sidebar */
-.side-bar {
-  border-right: 1px solid #2c2c2c;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
-  z-index: 100;
-}
-
-/* Facultatif : un petit effet d'ombre sur le header aussi */
-.site-header {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-/* Coins arrondis & fond plus doux pour la sidebar */
-.side-bar {
-  background-color: #181818 !important;
-  border-right: 1px solid #2c2c2c;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-/* Arrondir les encadrés dans le contenu */
-.alert-red,
-.alert-orange,
-.alert-green,
-.alert-blue {
-  border-radius: 6px;
-}
-
-/* Ajout d'un effet de survol sur les liens dans la sidebar */
-.nav-list .nav-list-item .nav-list-link {
-  transition: background-color 0.2s ease;
-  border-radius: 4px;
-  padding: 0.4rem 0.6rem;
-}
-
-.nav-list .nav-list-item .nav-list-link:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-/* Effet doux sur le contenu principal */
-.main-content {
-  background-color: #151515 !important;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 0 12px rgba(0,0,0,0.25);
-}
-
-/* Titre principal avec glow léger */
-h1 {
-  text-shadow: 1px 1px 3px rgba(255,255,255,0.1);
-}
-
-/* Style pour le bouton "toggle" (si tu l’utilises) */
-#dark-mode-toggle {
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-#dark-mode-toggle:hover {
-  transform: scale(1.05);
-}
-
-/* Animation d'apparition douce pour les encadrés */
-.alert-red,
-.alert-orange,
-.alert-green,
-.alert-blue {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
+/* Animation d’apparition */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -247,44 +107,64 @@ h1 {
   }
 }
 
-/* Police personnalisée pour le corps du site */
-body {
-  font-family: 'Poppins', sans-serif;
+/* === Layout général sombre unifié === */
+.main-content,
+.side-bar,
+.site-nav,
+.site-header,
+.site-footer {
+  background-color: #121212 !important;
+  color: #e0e0e0 !important;
 }
 
-/* Optionnel : Police différente pour les titres */
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
+.main-content {
+  background-color: #151515 !important;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
 }
 
-body {
-  font-family: 'Inter', sans-serif;
+/* Sidebar */
+.side-bar {
+  background-color: #181818 !important;
+  border-right: 1px solid #2c2c2c;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 100;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Orbitron', sans-serif;
+/* Survol des liens de la navigation */
+.nav-list .nav-list-item .nav-list-link {
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+.nav-list .nav-list-item .nav-list-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Effet glow sur les titres */
-h1, h2, h3 {
-  text-shadow: 0 0 3px rgba(100, 224, 255, 0.7), 0 0 10px rgba(0, 225, 255, 0.5);
+/* Ombre douce sur l'en-tête */
+.site-header {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Glow pour les encadrés */
-
-.alert-red {
-  box-shadow: 0 0 8px rgba(239, 83, 80, 0.4);
+/* === Bouton Dark Mode Toggle === */
+#dark-mode-toggle {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s, transform 0.2s;
 }
-
-.alert-orange {
-  box-shadow: 0 0 8px rgba(255, 152, 0, 0.4);
-}
-
-.alert-green {
-  box-shadow: 0 0 8px rgba(102, 187, 106, 0.4);
-}
-
-.alert-blue {
-  box-shadow: 0 0 8px rgba(144, 202, 249, 0.4);
+#dark-mode-toggle:hover {
+  background-color: var(--color-background-muted);
+  transform: scale(1.05);
 }
