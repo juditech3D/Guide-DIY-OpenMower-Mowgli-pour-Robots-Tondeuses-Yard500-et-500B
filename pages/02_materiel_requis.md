@@ -11,18 +11,17 @@ Ce projet repose sur l’utilisation de la carte mère **d’origine** des modè
 
 ---
 
-## 🧩 Liste du matériel recommandé
+### 🧰 Tableau du matériel recommandé
 
-| Équipement | Référence / Lien | Remarques |
-|-----------|------------------|-----------|
-| 🧠 **Raspberry Pi 4** | [Lien recommandé](https://raspberrytips.fr/amz/pi4) | 4 Go minimum – fonctionne aussi avec Pi 3 ou Pi 5 |
-| 🔌 **Convertisseur DC/DC LM2596S** | [Amazon](https://amzn.eu/d/jhNev6j) | Alimentation 5V stable pour le RPi |
-| 📡 **GPS RTK F9P (sans header)** | [Ardusimple](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers) | Pour une précision centimétrique |
-| 🔌 **Câble d’antenne F9P vers antenne** | [Aliexpress](https://fr.aliexpress.com/item/1005004690761874.html) | Indispensable pour raccorder votre antenne |
-| 📶 **Antenne BT-603** | [Aliexpress BT-603](https://fr.aliexpress.com/item/32991527632.html) | Plus puissante que la BT-560 |
-| 🛜 **Connexion Internet** | RJ45 ou Wi-Fi | Nécessaire pour SSH et téléchargement de paquets |
-| 🖥️ **Logiciel SSH (PC)** | [Mobaxterm](https://mobaxterm.mobatek.net/download-home-edition.html) ou [Raspberry Pi Connect](https://connect.raspberrypi.com) | Pour se connecter au Pi à distance |
-| 💾 **Carte microSD / SSD** | min. 16 Go | Préférez un SSD pour de meilleures performances |
+| Équipement | Références / Liens utiles | Remarques |
+|-----------|----------------------------|-----------|
+| 🧠 **Raspberry Pi 4** | [Kubii](https://www.kubii.com/fr/370-raspberry-pi-4-pi-400/)<br>[Amazon](https://amzn.eu/d/hwgFRWU) | Pi 4 conseillé pour les performances |
+| ⚡ **Module d'alimentation LM2596S** | [Amazon](https://amzn.eu/d/jhNev6j)<br>[AliExpress](https://fr.aliexpress.com/item/32991657981.html)<br>[Conrad](https://www.conrad.fr/) | Pour convertir le 24V en 5V |
+| 📡 **GPS RTK F9P (Ardusimple)** | [Ardusimple](https://fr.ardusimple.com/product/simplertk2b/?attribute_pa_header-options=without-headers)<br>[AliExpress](https://fr.aliexpress.com/item/1005004690761874.html)<br>[Tindie](https://www.tindie.com/) | Indispensable pour précision centimétrique |
+| 📶 **Antenne GNSS (BT560 ou BT603)** | [AliExpress BT560](https://fr.aliexpress.com/item/32991527632.html)<br>[AliExpress BT603](https://fr.aliexpress.com/item/32991527632.html) | La BT603 est plus puissante |
+| 🔌 **Câble d'antenne SMA** | [AliExpress](https://fr.aliexpress.com/item/1005004690761874.html)<br>[Amazon](https://www.amazon.fr/) | Pour connecter le GPS à l’antenne |
+| 🔗 **ST-Link V2 (pour le firmware)** | [Amazon](https://www.amazon.fr/)<br>[AliExpress](https://fr.aliexpress.com/)<br>[Kubii](https://www.kubii.fr/) | Pour flasher la carte STM32 |
+| 🖥️ **Mobaxterm (SSH)** | [Mobaxterm](https://mobaxterm.mobatek.net/download-home-edition.html)<br>[Pi Connect](https://connect.raspberrypi.com) | Pour piloter le Raspberry Pi |
 
 ---
 

@@ -22,7 +22,7 @@ Ce guide est spécifiquement conçu pour :
 - Yardforce 500 ✅
 - Yardforce 500B ✅
 
-Ces modèles doivent être équipés de leur carte mère d’origine **STM32 F103 ou F402**.  
+Ces modèles doivent être équipés de leur carte mère d’origine **(STM32 F103 ou F402)
 Il peut aussi être partiellement compatible avec d'autres modèles utilisant la même carte.
 
 ---
