@@ -68,7 +68,7 @@ Ce guide est organisé en plusieurs parties accessibles via le menu latéral :
 
 ---
 
-## 📂 Bloc notes
+## 📂 Rappels des Blocs
 
 <div class="alert-red">
   <div class="alert-title">⚠️ Avertissement important</div>

@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@500;700&display=swap');
+
 :root {
     --color-scheme: dark;
 }
+
 
 /* Bouton toggle minimal */
 #dark-mode-toggle {
@@ -148,6 +151,7 @@
     color: #90caf9;
   }
 }
+
 /* Unifier le fond entre le contenu principal et la sidebar */
 body,
 .main-content,
@@ -173,4 +177,114 @@ body,
 /* Facultatif : un petit effet d'ombre sur le header aussi */
 .site-header {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Coins arrondis & fond plus doux pour la sidebar */
+.side-bar {
+  background-color: #181818 !important;
+  border-right: 1px solid #2c2c2c;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+/* Arrondir les encadrés dans le contenu */
+.alert-red,
+.alert-orange,
+.alert-green,
+.alert-blue {
+  border-radius: 6px;
+}
+
+/* Ajout d'un effet de survol sur les liens dans la sidebar */
+.nav-list .nav-list-item .nav-list-link {
+  transition: background-color 0.2s ease;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+}
+
+.nav-list .nav-list-item .nav-list-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Effet doux sur le contenu principal */
+.main-content {
+  background-color: #151515 !important;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 0 12px rgba(0,0,0,0.25);
+}
+
+/* Titre principal avec glow léger */
+h1 {
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.1);
+}
+
+/* Style pour le bouton "toggle" (si tu l’utilises) */
+#dark-mode-toggle {
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+#dark-mode-toggle:hover {
+  transform: scale(1.05);
+}
+
+/* Animation d'apparition douce pour les encadrés */
+.alert-red,
+.alert-orange,
+.alert-green,
+.alert-blue {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Police personnalisée pour le corps du site */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Optionnel : Police différente pour les titres */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Effet glow sur les titres */
+h1, h2, h3 {
+  text-shadow: 0 0 3px rgba(100, 224, 255, 0.7), 0 0 10px rgba(0, 225, 255, 0.5);
+}
+
+/* Glow pour les encadrés */
+
+.alert-red {
+  box-shadow: 0 0 8px rgba(239, 83, 80, 0.4);
+}
+
+.alert-orange {
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.4);
+}
+
+.alert-green {
+  box-shadow: 0 0 8px rgba(102, 187, 106, 0.4);
+}
+
+.alert-blue {
+  box-shadow: 0 0 8px rgba(144, 202, 249, 0.4);
 }
