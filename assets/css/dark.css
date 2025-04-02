@@ -1,0 +1,176 @@
+:root {
+    --color-scheme: dark;
+}
+
+/* Bouton toggle minimal */
+#dark-mode-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#dark-mode-toggle:hover {
+    background-color: var(--color-background-muted);
+}
+/* Forcer le mode sombre */
+:root {
+    color-scheme: dark;
+  }
+  
+  body {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+  }
+  :root {
+    --color-background: #121212;
+    --color-background-muted: #1e1e1e;
+    --color-foreground: #e0e0e0;
+    --color-text: #ffffff;
+    --color-link: #4fc3f7;
+    --color-link-visited: #ce93d8;
+    --color-link-hover: #81d4fa;
+    --color-border: #333;
+    --color-accent: #90caf9;
+    --color-success: #66bb6a;
+    --color-danger: #ef5350;
+  }
+ /* === Encadrés stylisés === */
+
+.alert-red,
+.alert-orange,
+.alert-green {
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-left: 6px solid;
+  border-radius: 4px;
+}
+
+/* Titres d'encadré */
+.alert-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ROUGE - Avertissements */
+.alert-red {
+  background-color: #ffebee;
+  border-left-color: #c62828;
+}
+
+.alert-red .alert-title {
+  color: #c62828;
+}
+
+/* ORANGE - Ressources */
+.alert-orange {
+  background-color: #fff3e0;
+  border-left-color: #ef6c00;
+}
+
+.alert-orange .alert-title {
+  color: #ef6c00;
+}
+
+/* VERT - Astuces */
+.alert-green {
+  background-color: #e8f5e9;
+  border-left-color: #2e7d32;
+}
+
+.alert-green .alert-title {
+  color: #2e7d32;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .alert-red {
+    background-color: #2b1a1a;
+    color: #ffcdd2;
+    border-left-color: #ef5350;
+  }
+
+  .alert-red .alert-title {
+    color: #ff8a80;
+  }
+
+  .alert-orange {
+    background-color: #3b2a1a;
+    color: #ffe0b2;
+    border-left-color: #ffa726;
+  }
+
+  .alert-orange .alert-title {
+    color: #ffcc80;
+  }
+
+  .alert-green {
+    background-color: #1b2e1b;
+    color: #c9f5cc;
+    border-left-color: #66bb6a;
+  }
+
+  .alert-green .alert-title {
+    color: #a5d6a7;
+  }
+}
+/* BLEU - Informations */
+.alert-blue {
+  background-color: #e3f2fd;
+  border-left: 6px solid #1976d2;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+.alert-blue .alert-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #1976d2;
+}
+
+/* Mode sombre */
+@media (prefers-color-scheme: dark) {
+  .alert-blue {
+    background-color: #1a2633;
+    color: #bbdefb;
+    border-left-color: #64b5f6;
+  }
+
+  .alert-blue .alert-title {
+    color: #90caf9;
+  }
+}
+/* Unifier le fond entre le contenu principal et la sidebar */
+body,
+.main-content,
+.side-bar,
+.site-nav,
+.site-header,
+.site-footer {
+  background-color: #121212 !important;
+}
+.main-content,
+.side-bar,
+.site-nav,
+.site-header {
+  color: #e0e0e0 !important;
+}
+/* Ajout d'une bordure droite sur la sidebar */
+.side-bar {
+  border-right: 1px solid #2c2c2c;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+/* Facultatif : un petit effet d'ombre sur le header aussi */
+.site-header {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}

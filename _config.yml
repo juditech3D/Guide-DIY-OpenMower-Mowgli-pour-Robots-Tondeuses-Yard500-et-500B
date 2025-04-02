@@ -14,15 +14,10 @@ just_the_docs:
   show_toc: true
   toc_levels: 1..3
   toc_sticky: true
-  color_scheme_toggle: true
-  color_scheme: "light" # "light" par défaut, mais basculable
-
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      custom_css:
-        - "assets/css/custom.css"
-      custom_js:
-        - "assets/js/dark-mode-toggle.js"
+  color_scheme_toggle: false
+  color_scheme: "dark" # "light" par défaut, mais basculable
+  
+collections:
+  pages:
+    output: true
+    permalink: /:path/
