@@ -92,3 +92,10 @@ Ce guide est organisé en plusieurs parties accessibles via le menu latéral :
   <div class="alert-title">ℹ️ Information complémentaire</div>
   <p>Ce projet est compatible avec OpenMower pour les carte d'origine yardfoce 500/500B</p>
 </div>
+
+<script>
+  var beamer_config = {
+    product_id : "YUkxsqqe75314" // DO NOT CHANGE: This is your product code on Beamer
+  };
+</script>
+<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>

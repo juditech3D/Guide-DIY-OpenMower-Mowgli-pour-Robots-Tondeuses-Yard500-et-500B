@@ -23,4 +23,4 @@ Ce schéma présente le câblage complet du robot basé sur le modèle Yardforce
 
 ## 🖼️ Aperçu statique
 
-![Schéma câblage](../images/yardforce_wiring2.drawio.png)
+![Schéma câblage](/images/yardforce_wiring2.drawio.png/)

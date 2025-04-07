@@ -6,39 +6,47 @@ layout: default
 permalink: /03_installation_preparation/
 ---
 
-# 💾 Installation & Préparation du Raspberry Pi
+# 💾 Installation et Préparation du Raspberry Pi
 
-Cette section vous guide pour préparer le Raspberry Pi qui hébergera le système OpenMower basé sur le fork Mowgli. Vous apprendrez à graver le système sur une carte SD ou SSD, configurer le Wi-Fi et SSH, et installer les outils nécessaires.
-
-## 🧱 Étapes principales
-
-1. Préparer la carte SD ou SSD
-2. Configurer l'accès Wi-Fi et SSH
-3. Installer Docker et les dépendances
-4. Cloner le dépôt `mowgli-docker`
-5. Lancer les conteneurs
+Cette section vous guidera pas à pas pour configurer votre Raspberry Pi afin qu’il soit prêt à exécuter les services nécessaires à OpenMower.
 
 ---
 
-## 📦 Image Raspberry Pi OS
+## 📀 Préparation de la carte SD/SSD
 
-Téléchargez Raspberry Pi Imager et suivez les étapes pour graver une image Raspberry Pi OS 64 bits sur la carte SD.
+Avant toute chose, vous devez préparer votre carte SD ou SSD avec **Raspberry Pi OS Lite (64-bit)**.
 
-[Télécharger Raspberry Pi Imager](https://www.raspberrypi.com/software/)
+### 🔧 Étapes :
+- Utilisez [**Raspberry Pi Imager**](https://www.raspberrypi.com/software/) pour flasher Raspberry Pi OS Lite (64-bit).
+- Vous pouvez suivre la vidéo ci-dessous pour voir comment faire :
 
-## 📶 Configuration Wi-Fi et SSH
+![Tuto Raspberry Pi Imager](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/M%C3%A9dia/Tuto%20raspberry%20pi%20imager%20%E2%80%90%20R%C3%A9alis%C3%A9e%20avec%20Clipchamp.gif)
 
-Deux options :
+---
 
-- **Avec Pi Imager** (plus simple)
-- **Manuellement** : créer `wpa_supplicant.conf` + fichier `ssh` dans la partition `boot`.
+## 📡 Configuration Wi-Fi et SSH
 
+Pour connecter automatiquement votre Raspberry Pi à un réseau Wi-Fi et activer SSH dès le démarrage, deux méthodes s’offrent à vous :
+
+✅ Via Raspberry Pi Imager (le plus simple, montré dans le GIF ci-dessus)  
+🔧 Ou manuellement en éditant des fichiers sur la carte SD
+
+---
+
+### ⚙️ Configuration manuelle : Wi-Fi & SSH
 <details>
-<summary>Voir instructions manuelles</summary>
+<summary>📂 Dépliez pour voir</summary>
 
-Créer un fichier `wpa_supplicant.conf` avec :
+#### 1. Préparation de la carte SD
 
-```txt
+1. Gravez l’image Raspberry Pi OS (64 bits) sur la carte SD avec **Raspberry Pi Imager** ou **Balena Etcher**
+2. Insérez la carte dans votre ordinateur
+3. Accédez à la partition `boot` (visible depuis Windows/macOS/Linux)
+4. Ouvrez un éditeur de texte (Notepad++, TextEdit, Nano…)
+
+#### 2. Créez le fichier `wpa_supplicant.conf`
+
+```sh
 country=FR
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -50,60 +58,76 @@ network={
 }
 ```
 
-Et un fichier vide `ssh` dans la partition `boot`.
+#### 💡 Pour plusieurs réseaux :
+```sh
+network={
+    ssid="Premier_SSID"
+    psk="Premier_Mot_de_passe"
+    key_mgmt=WPA-PSK
+    priority=2
+}
 
-</details>
-
-## 🛠️ Connexion et mise à jour
-
-Après démarrage du Pi, connectez-vous via SSH et mettez le système à jour :
-
-```bash
-sudo apt update && sudo apt upgrade -y
+network={
+    ssid="Deuxieme_SSID"
+    psk="Deuxieme_Mot_de_passe"
+    key_mgmt=WPA-PSK
+    priority=1
+}
 ```
-
-## 🐳 Installation de Docker
-
-```bash
-curl -fsSL https://get.docker.com | sh
-```
-
-Et ajoutez votre utilisateur au groupe docker :
-
-```bash
-sudo usermod -aG docker $USER
-```
-
-## 📂 Clonage du dépôt Mowgli Docker
-
-```bash
-sudo apt install git
-git clone https://github.com/cedbossneo/mowgli-docker
-cd mowgli-docker
-```
-
-## ⚙️ Configuration du fichier `.env`
-
-Modifiez les IP dans le fichier `.env` :
-
-```bash
-nano .env
-```
-
-Remplacez par l'adresse IP du Raspberry Pi (Wi-Fi) pour `ROS_IP` et `MOWER_IP`.
-
-## 🚀 Lancement des conteneurs
-
-```bash
-docker compose up -d
-```
-
-> ☕ Cette étape peut prendre du temps : les images sont téléchargées depuis internet.
-
-## 💡 Astuce
-
-Pensez à fixer l'IP du Raspberry Pi dans votre box internet pour éviter qu'elle change.
 
 ---
 
-[🔙 Revenir à la page Bonus pour télécharger les pièces imprimables 3D personnalisées](../07_bonus/)
+#### 3. Activez SSH
+
+Créez un fichier vide nommé `ssh` (sans extension) dans la partition `boot`.
+
+---
+
+#### 4. Sauvegardez et éjectez
+
+- Enregistrez les fichiers
+- Éjectez proprement la carte SD ou SSD
+
+</details>
+
+---
+
+## 🚀 Démarrer le Raspberry Pi et se connecter via SSH
+
+Une fois la carte prête, placez-la dans le Raspberry Pi et branchez-le à l’alimentation (et à l’Ethernet en option).
+
+---
+
+### 🔍 Trouver l’adresse IP du Raspberry Pi
+<details>
+<summary>📡 Dépliez pour voir</summary>
+
+#### 🌐 Méthode 1 – Depuis votre box Internet
+
+- Accédez à votre box (ex : `192.168.1.1`)
+- Repérez un appareil nommé **raspberrypi**
+
+#### 🛠️ Méthode 2 – Avec [Advanced IP Scanner](https://www.advanced-ip-scanner.com/fr/)
+
+- Téléchargez, scannez votre réseau
+- Repérez un appareil nommé Raspberry Pi
+
+![Advanced IP Scanner](https://github.com/juditech3D/Guide-DIY-OpenMower-Mowgli-pour-Robots-Tondeuses-Yard500-et-500B/blob/main/images/Advanced%20ip%20scanner/Advanced%20ip%20scanner.png)
+
+</details>
+
+---
+
+### 🔑 Se connecter en SSH
+
+Une fois l’IP identifiée, connectez-vous via SSH avec MobaXTerm, PuTTY ou en ligne de commande :
+
+```sh
+ssh pi@192.168.X.XX
+```
+
+Par défaut, le mot de passe est `raspberry`.
+
+---
+
+✅ Une fois connecté, passez à la configuration logicielle du système.
