@@ -18,6 +18,7 @@ Retrouvez ici la vue d’ensemble des sections principales du guide, avec accès
 - [⚙️ Configuration]({{ '/04_configuration/' | relative_url }})
 - [📥 Injection du firmware]({{ '/05_injection_firmware/' | relative_url }})
 - [📱 Configuration OpenMower]({{ '/06_configuration_openmower/' | relative_url }})
+- [🔌 Interfaces Série et UART5 (optionnel)]({{ '/04_uart5_configuration/' | relative_url }})
 - [🎁 Bonus : pièces 3D & firmwares]({{ '/07_bonus/' | relative_url }})
 - [❓ FAQ]({{ '/08_faq/' | relative_url }})
 - [💖 Soutenir]({{ '/09_soutenir/' | relative_url }})

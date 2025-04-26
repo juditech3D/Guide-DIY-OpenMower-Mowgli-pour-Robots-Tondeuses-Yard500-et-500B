@@ -6,41 +6,77 @@ permalink: /ser2net/
 layout: default
 ---
 
-# Exposer les ports série du robot Mowgli via Ser2Net
+# 🛠️ Exposer les ports série du robot Mowgli via Ser2Net
 
-> Ce tutoriel a été réalisé par Julien Guy et adapté à partir du travail de [cedbossneo](https://github.com/cedbossneo/mowgli-docker.git). Le fichier Docker Compose incluant Ser2Net et une partie de la documentation originale ont été créés par cedbossneo. Merci à lui pour cette base de travail.
+> 🙏 Ce tutoriel a été réalisé par **Julien Guy**, basé sur les travaux de [cedbossneo](https://github.com/cedbossneo/mowgli-docker.git) (Docker Compose original et documentation). Un grand merci à eux pour leur contribution précieuse.
 
-## Attention
+---
 
-- **Connexion Wi-Fi** : Une faible réception Wi-Fi peut entraîner des problèmes de connexion avec le serveur, impactant les performances. Mais le même problème se pose dans l’autre cas avec les paquets de correction GPS RTK, qui auraient également du mal à atteindre le Raspberry Pi dans ces conditions. Assurez-vous d’avoir une connexion Wi-Fi stable pour éviter les interruptions.
+## 📑 Sommaire rapide de cette page
 
-Ce tutoriel explique comment déplacer tous les conteneurs Docker sur une autre machine, telle qu’un serveur OpenMower. Le Raspberry Pi expose les ports série `/dev/gps` et `/dev/mowgli` sur le réseau. Le serveur utilise ces ports pour créer deux ports série virtuels, utilisables dans les conteneurs Docker (ROS Serial et ROS OpenMower).
+- [Objectif](#-objectif)
+- [Pré-requis](#-pré-requis)
+- [Avantages constatés](#-avantages-constatés)
+- [Mise en œuvre sur le Raspberry Pi](#-1️⃣-sur-le-raspberry-pi)
+- [Mise en œuvre sur le serveur distant](#-2️⃣-sur-le-serveur-distant-vm-debianubuntu)
+- [Bonus : Configurer le GPS via U-center](#-bonus--configurer-votre-f9p-via-u-center)
+- [Conclusion](#-✅-conclusion)
 
-## Pré-requis
+---
 
-- Aisance avec Linux, la ligne de commande et les transferts de fichiers (SFTP/SCP)
-- Une machine ou une VM disponible (par exemple sous Proxmox)
+<div class="alert-red">
+  <div class="alert-title">⚠️ Attention importante</div>
+  <p><strong>Connexion Wi-Fi :</strong> Une mauvaise réception Wi-Fi peut provoquer des déconnexions série ou des pertes de paquets RTK. Assurez-vous d’avoir une connexion stable avant d’utiliser cette méthode.</p>
+</div>
 
-## Avantages constatés
+---
 
-- Moins de consommation énergétique (objectif : Pi Zero Gen 1 à la place du Pi 4)
-- Calculs déportés sur une machine plus puissante (VM)
-- Moins d'usure de la carte SD (moins de cycles `up/down` Docker)
-- Configuration GPS à distance via U-center
-- Gestion facile des conteneurs (Portainer, Dozzle)
-- Déploiements rapides (&lt;2min) et redémarrage &lt;10s
+# 🛠️ Objectif
 
-## Mise en œuvre
+Déporter l’exécution des conteneurs Docker OpenMower sur une autre machine (ex : serveur Proxmox) tout en exposant les ports série `/dev/gps` et `/dev/mowgli` via le réseau grâce à **Ser2Net**.
 
-### Sur le Raspberry Pi
+---
+
+# 📋 Pré-requis
+
+- ✅ Aisance avec Linux, SSH et la ligne de commande
+- ✅ Une machine dédiée ou une VM disponible (Debian/Ubuntu recommandé)
+- ✅ Savoir transférer des fichiers (SFTP/SCP)
+
+---
+
+# 🚀 Avantages constatés
+
+- ⚡ Réduction de la consommation énergétique (possibilité d'utiliser un Pi Zero)
+- 🖥️ Calculs ROS déportés sur une machine plus puissante
+- 💾 Moins d'usure de la carte SD
+- 🌐 Accès simplifié à la configuration GPS (ex : U-center)
+- 📦 Gestion optimisée via Portainer ou Dozzle
+- 🔁 Redémarrage ultra rapide des conteneurs (<10 secondes)
+
+---
+
+# 🛠️ 1️⃣ Sur le Raspberry Pi
+
+## ⏹️ Arrêter les conteneurs Docker existants
 
 ```bash
-# Arrêter les conteneurs Docker si déjà installés
 docker compose down
 ```
 
-- Sauvegardez `ros/map.bag`
-- Éditez `/etc/udev/rules.d/50-mowgli.rules` :
+---
+
+## 📂 Sauvegarder votre carte de tonte
+
+```bash
+sudo cp ./ros/map.bag ~/backup_map.bag
+```
+
+---
+
+## 🛠️ Modifier les règles UDEV pour nommer les périphériques
+
+Éditez ou créez `/etc/udev/rules.d/50-mowgli.rules` :
 
 ```bash
 SUBSYSTEM=="tty" ATTRS{product}=="Mowgli", SYMLINK+="mowgli"
@@ -48,14 +84,19 @@ SUBSYSTEM=="tty" ATTRS{idVendor}=="1546" ATTRS{idProduct}=="01a9", SYMLINK+="gps
 SUBSYSTEM=="tty" ATTRS{idVendor}=="303a" ATTRS{idProduct}=="4001", SYMLINK+="gps"
 ```
 
-- Installez et activez ser2net :
+---
+
+## ⚙️ Installer Ser2Net
 
 ```bash
-apt install -y ser2net
-systemctl enable ser2net
+sudo apt update
+sudo apt install -y ser2net
+sudo systemctl enable ser2net
 ```
 
-- Configurez `/etc/ser2net.yaml` :
+---
+
+## ✏️ Configurer `/etc/ser2net.yaml`
 
 ```yaml
 connection: &mowgli01
@@ -77,23 +118,36 @@ connection: &gps01
   connector: serialdev, /dev/gps, 460800n81,local
 ```
 
+---
+
+## 🔄 Redémarrer le Raspberry Pi
+
 ```bash
-# Redémarrer le Pi
 sudo reboot
 ```
 
-### Sur le serveur (VM Debian sous Proxmox ou Ubuntu)
+---
+
+# 🛠️ 2️⃣ Sur le serveur distant (VM Debian/Ubuntu)
+
+## 📥 Installer Docker
 
 ```bash
-# Installation de Docker
 curl -sSL https://get.docker.com | sh
+```
 
-# Clonage du dépôt (par défaut cedbossneo)
+---
+
+## 📂 Cloner mowgli-docker
+
+```bash
 git clone https://github.com/cedbossneo/mowgli-docker.git
 cd mowgli-docker
 ```
 
-- Éditez `.env` :
+---
+
+## ⚙️ Modifier le fichier `.env`
 
 ```env
 ROS_IP=127.0.0.1
@@ -101,7 +155,9 @@ MOWER_IP=192.168.1.66
 IMAGE=ghcr.io/cedbossneo/mowgli-docker:cedbossneo
 ```
 
-- Ajoutez dans `docker-compose.ser2net.yaml` :
+---
+
+## 🛠️ Ajouter OpenMower-GUI dans `docker-compose.ser2net.yaml`
 
 ```yaml
 gui:
@@ -125,23 +181,45 @@ gui:
     - /var/run/docker.sock:/var/run/docker.sock
 ```
 
-- Copiez `map.bag` dans `ros/`
-- Lancez les conteneurs :
+---
+
+## 🚀 Lancer les conteneurs
 
 ```bash
 docker compose -f docker-compose.ser2net.yaml up -d
 ```
 
-## Bonus : Configuration GPS du F9P via U-center
+---
 
-Pour configurer le F9P via U-center, vous devez **arrêter les conteneurs Docker** pour libérer le port série :
+# 🎯 Bonus : Configurer votre F9P via U-center
+
+Pour reconfigurer votre GPS :
+
+1. **Arrêter les conteneurs Docker** :
 
 ```bash
 docker compose down
 ```
 
-Ensuite, connectez-vous au port TCP `4002` avec U-center pour changer les paramètres du GPS (ex : fréquence), et réinjectez la configuration si besoin.
+2. **Utiliser U-center** pour se connecter sur l'IP du Pi port 4002.
 
-## Conclusion
+---
 
-Cette configuration vous permet de délester le Raspberry Pi, centraliser la gestion via un serveur, et simplifier le déploiement ou les tests. Elle est particulièrement utile pour configurer à distance le GPS, tester différentes fréquences, et préserver la durée de vie de votre matériel.
+<div class="alert-red">
+  <div class="alert-title">⚠️ Important</div>
+  <p>Après toute modification du GPS, assurez-vous de recharger la configuration dans le firmware si nécessaire !</p>
+</div>
+
+---
+
+# ✅ Conclusion
+
+Cette solution permet d’alléger votre Raspberry Pi, d'améliorer les performances réseau et d'assurer une gestion plus fiable de votre robot.
+
+---
+
+<div style="text-align: center;">
+[⬅ Retour à la page d'accueil]({{ '/' | relative_url }})  
+<br>
+[📑 Aller au Sommaire]({{ '/pages/sommaire/' | relative_url }})
+</div>

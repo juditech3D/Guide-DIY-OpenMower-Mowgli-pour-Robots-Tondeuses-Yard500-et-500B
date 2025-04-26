@@ -120,7 +120,7 @@ Une fois la carte prête, placez-la dans le Raspberry Pi et branchez-le à l’a
 
 ### 🔑 Se connecter en SSH
 
-Une fois l’IP identifiée, connectez-vous via SSH avec MobaXTerm, PuTTY ou en ligne de commande :
+Une fois l’IP identifiée, connectez-vous via SSH avec MobaXTerm, PuTTY en ligne de commande :
 
 ```sh
 ssh pi@192.168.X.XX
