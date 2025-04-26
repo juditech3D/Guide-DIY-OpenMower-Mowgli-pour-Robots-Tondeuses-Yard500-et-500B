@@ -47,7 +47,7 @@ Déporter l’exécution des conteneurs Docker OpenMower sur une autre machine (
 
 # 🚀 Avantages constatés
 
-- ⚡ Réduction de la consommation énergétique (possibilité d'utiliser un Pi Zero)
+- ⚡ Réduction de la consommation énergétique (possibilité d'utiliser un Pi Zero (en test))
 - 🖥️ Calculs ROS déportés sur une machine plus puissante
 - 💾 Moins d'usure de la carte SD
 - 🌐 Accès simplifié à la configuration GPS (ex : U-center)
