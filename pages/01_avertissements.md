@@ -1,8 +1,8 @@
 ---
 title: "⚠️ Avertissements"
 nav_order: 1
-parent: "🏠 Guide OpenMower"
 permalink: /01_avertissements/
+parent: "🏠 Guide OpenMower"
 layout: default
 ---
 
@@ -22,7 +22,7 @@ Ce guide est spécifiquement conçu pour :
 - Yardforce 500 ✅
 - Yardforce 500B ✅
 
-Ces modèles doivent être équipés de leur carte mère d’origine **(STM32 F103 ou F402)
+Ces modèles doivent être équipés de leur carte mère d’origine **(STM32 F103 ou F402)**.
 Il peut aussi être partiellement compatible avec d'autres modèles utilisant la même carte.
 
 ---
@@ -31,7 +31,7 @@ Il peut aussi être partiellement compatible avec d'autres modèles utilisant la
 
 <div class="alert-orange">
   <div class="alert-title">🛑 Fonctionnalités réduites</div>
-  Le clavier et les voyants situés sur le capot du robot <strong>ne seront pas pleinement fonctionnels</strong> avec cette configuration.
+  Le clavier et les voyants situés sur le capot du robot <strong>ne seront pas pleinement fonctionnels</strong> avec cette configuration, sauf dans certains cas mis à jour.
 </div>
 
 ### Yardforce 500 :
@@ -43,8 +43,22 @@ Ces éléments restent fonctionnels **sans modification** du firmware.
 
 ### Yardforce 500B :
 
-- ❌ Clavier non fonctionnel
-- ❌ Voyants non fonctionnels
+- 🆕 ✅ **Depuis le firmware Mowgli de Nekraus (25/04/2025)** :
+  - Clavier pleinement fonctionnel ✅
+  - Voyants pleinement fonctionnels ✅
+
+> Si vous utilisez un firmware autre que celui de Nekraus, les fonctionnalités du panneau peuvent être limitées.
+
+---
+
+## 🖥️ Sérigraphie du panneau Yardforce (nouveauté)
+
+Vous pourrez bientôt retrouver :
+
+- 📷 Un aperçu visuel du panneau et de la disposition des boutons.
+- 🖨️ Un modèle imprimable 3D de la sérigraphie pour moderniser votre robot.
+
+[🔗 Aller voir la partie Schéma de câblage]({{ '/pages/schema/' | relative_url }})
 
 ---
 
@@ -72,3 +86,5 @@ Ces éléments restent fonctionnels **sans modification** du firmware.
   <br>
   👉 Pensez à consulter la page <a href="{{ '/mise_a_jour/' | relative_url }}">📝 Mises à jour du guide</a> pour ne rien manquer.
 </div>
+
+[⬅ Retour à l'accueil]({{ '/' | relative_url }}) | [📑 Aller au Sommaire]({{ '/pages/sommaire/' | relative_url }})

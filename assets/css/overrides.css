@@ -1,0 +1,7 @@
+/* Correction pour le titre tronqué dans la sidebar */
+.side-bar .site-title {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+  }
+  

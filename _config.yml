@@ -1,4 +1,4 @@
-title: Guide OpenMower Mowgli
+title: OpenMower Mowgli
 description: Guide complet pour configurer OpenMower avec Mowgli et Yardforce 500B
 theme: just-the-docs
 
@@ -15,8 +15,11 @@ just_the_docs:
   toc_levels: 1..3
   toc_sticky: true
   color_scheme_toggle: false
-  color_scheme: "dark" # "light" par défaut, mais basculable
-  
+  color_scheme: "dark"
+  nav_width: 300
+  custom_css:
+    - "assets/css/overrides.css"  # ✅ Corrigé ici
+
 collections:
   pages:
     output: true
